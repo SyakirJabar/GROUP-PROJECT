@@ -1,65 +1,51 @@
-#include <iostream>
-#include <fstream>
-#include <cstring>
-#include <iomanip>
-
-using namespace std;
-
-// --- PASS BY VALUE ---
-void saveToFile(string name, int totalQty, int bQty, int lQty, double totalval) {
-    ofstream outputSystem("MainRecord.txt", ios::app);
-
-    if (outputSystem) {
-        outputSystem << "Item: " << name
-            << " | Total: " << totalQty << " | Broken: " << bQty << " | Lost: " << lQty
-            << " | Total Value: RM" << fixed << setprecision(2) << totalval << endl;
-
-        outputSystem.close();
-        cout << ">> Record successfully saved to file!" << endl;
-    }
-    else
-        cout << ">> Error: File could not be opened!" << endl;
-}
-
-// --- PASS BY REFERENCE ---
-// Calculates value of lost/broken items specifically
-void calculateValues(int totalQty, int bQty, int lQty, double unitPrice, double& damageval) {
-    damageval = (bQty + lQty) * unitPrice;
-}
-
-int main() {
+void inputAndSaveData() {
     string itemName;
-    int total, broken, lost;
-    double price, totalDamageValue;
+    int quantity, brokenQty, lostQty;
+    double unitValue;
 
-    cout << "===== SPORT STOREROOM MANAGEMENT =====" << endl;
-    cout << "(Press Ctrl+Z then Enter at 'Item Name' to stop)" << endl;
+    cout << "\n--- SPORT STOREROOM: INSERT MODE ---" << endl;
+    cout << "(Press Ctrl+Z then Enter to stop and return to menu)" << endl;
 
+    // Using loop condition that reads itemName from cin to continue looping
+    // and returns false when Ctrl+Z is detected
     cout << "\nEnter Item Name: ";
-    // while(cin >> itemName) handles the infinite loop and Ctrl+Z
     while (cin >> itemName) {
 
+        // Collect the rest of the data for this item
         cout << "Enter Total Quantity: ";
-        cin >> total;
+        cin >> quantity;
 
-        cout << "Enter broken quantity: ";
-        cin >> broken;
+        cout << "Enter Broken Quantity: ";
+        cin >> brokenQty;
 
-        cout << "Enter lost quantity: ";
-        cin >> lost;
+        cout << "Enter Lost Quantity: ";
+        cin >> lostQty;
 
-        cout << "Enter estimate value per unit (RM): ";
-        cin >> price;
+        cout << "Enter Estimate Value per Unit (RM): ";
+        cin >> unitValue;
 
-        // Pass by Reference: totalDamageValue is updated inside the function
-        calculateValues(total, broken, lost, price, totalDamageValue);
-        // Pass by Value: Sends copies of all data to be saved
-        saveToFile(itemName, total, broken, lost, totalDamageValue);
+        // Open file in Append Mode
+        ofstream outFile("StoreroomData.txt", ios::app);
 
-        cout << "\n---------------------------------------" << endl;
+        if (outFile.is_open()) {
+            // Save raw data separated by spaces
+            outFile << itemName << " "
+                << quantity << " "
+                << brokenQty << " "
+                << lostQty << " "
+                << fixed << setprecision(2) << unitValue << endl;
+
+            outFile.close();
+            cout << ">> '" << itemName << "' saved successfully." << endl;
+        }
+        else {
+            cout << ">> Error: Unable to access StoreroomData.txt." << endl;
+        }
+
+        // Prompt for the next name to keep the loop going
         cout << "\nEnter Item Name: ";
     }
-
-    cout << "\nProgram terminated. Check 'MainRecord.txt'." << endl;
-    return 0;
+    // Clearing to ensure selection menu works after ctrl+Z
+    cin.clear();
+    cout << "\n>> Item entry complete. Returning to system..." << endl;
 }
