@@ -1,39 +1,48 @@
 // ================= SEARCH / RETRIEVE =================
-void searchRecord(Equipment items[], int count) {
-    if (count == 0) {
-        cout << "\nNo records to search!" << endl;
+void searchFromFile() {
+    string searchItem, itemName;
+    int quantity, brokenQty, lostQty;
+    double unitValue;
+    bool found = false;
+
+    cout << "\n--- SEARCH / RETRIEVE MODE ---" << endl;
+    cout << "Enter item name to search: ";
+    cin >> searchItem;
+
+    ifstream inFile("StoreroomData.txt");
+
+    if (!inFile.is_open()) {
+        cout << ">> Error: Cannot open StoreroomData.txt." << endl;
         return;
     }
 
-    char searchName[50];
-    bool found = false;
+    // Read data exactly in the same order as saved
+    while (inFile >> itemName >> quantity >> brokenQty >> lostQty >> unitValue) {
 
-    cout << "\nEnter equipment name to search: ";
-    cin.getline(searchName, 50);  // pastikan buffer clear sebelum panggil
+        if (itemName == searchItem) {
+            double totalValue = quantity * unitValue;
+            double brokenValue = brokenQty * unitValue;
+            double lostValue = lostQty * unitValue;
 
-    for (int i = 0; i < count; i++) {
-        if (strcmp(items[i].name, searchName) == 0) {
-            double totalValue = items[i].quantity * items[i].unitPrice;
-            double brokenValue = items[i].broken * items[i].unitPrice;
-            double lostValue = items[i].lost * items[i].unitPrice;
-
-            cout << "\nRecord Found!" << endl;
-            cout << "Equipment Name : " << items[i].name << endl;
-            cout << "Total Quantity : " << items[i].quantity << endl;
-            cout << "Broken Quantity: " << items[i].broken << endl;
-            cout << "Lost Quantity  : " << items[i].lost << endl;
-            cout << "Unit Price (RM): " << fixed << setprecision(2) << items[i].unitPrice << endl;
-            cout << "Total Value    : RM" << fixed << setprecision(2) << totalValue << endl;
-            cout << "Broken Value   : RM" << fixed << setprecision(2) << brokenValue << endl;
-            cout << "Lost Value     : RM" << fixed << setprecision(2) << lostValue << endl;
+            cout << "\nItem Found!" << endl;
+            cout << "Item Name       : " << itemName << endl;
+            cout << "Total Quantity  : " << quantity << endl;
+            cout << "Broken Quantity : " << brokenQty << endl;
+            cout << "Lost Quantity   : " << lostQty << endl;
+            cout << "Unit Value (RM) : " << fixed << setprecision(2) << unitValue << endl;
+            cout << "Total Value     : RM" << totalValue << endl;
+            cout << "Broken Value    : RM" << brokenValue << endl;
+            cout << "Lost Value      : RM" << lostValue << endl;
 
             found = true;
             break;
         }
     }
 
+    inFile.close();
+
     if (!found) {
-        cout << "\nItem not found!" << endl;
+        cout << "\n>> Item not found." << endl;
     }
 }
 
