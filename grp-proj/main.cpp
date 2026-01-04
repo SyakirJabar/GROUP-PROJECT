@@ -2,7 +2,7 @@
 
 #include "SportsEquip/Ball.h"
 #include "SportsEquip/Racket.h"
-#include "SportsEquip/Projectile.h"
+#include "SportsEquip/Throwable.h"
 #include "SportsStoreProg/SportsStoreProg.h"
 
 int main()

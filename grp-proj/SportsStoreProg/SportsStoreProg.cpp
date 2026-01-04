@@ -133,8 +133,9 @@ void SportsStoreProg::insEquip() {
                             (Racket(itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue));
                     break;
 
-        case 'P':   sportsEquip = std::make_unique<Throwable> 
+        case 'T':   sportsEquip = std::make_unique<Throwable> 
                             (Throwable(itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue));
+                    break;
         }
 
         eqpmnts.push_back(std::move(sportsEquip));
