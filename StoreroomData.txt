@@ -5,3 +5,4 @@ T ShoputSteelBall shotput 5 0 0 60.00
 H HockeyHelmet hockey 7 2 1 70.00
 S HockeyStick hockey 17 5 2 51.90
 B HockeyPuck hockey 5 0 0 30.00
+B tennisBall tennis 20 0 5 30.00
