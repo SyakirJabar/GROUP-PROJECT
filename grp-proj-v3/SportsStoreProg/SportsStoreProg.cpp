@@ -204,7 +204,7 @@ void SportsStoreProg::dispAllEquip()
     
     //header row
     std::cout << std::left
-              << std::setw(6)  << "Type"
+              << std::setw(6)  << "#"
               << std::setw(20) << "Name"
               << std::setw(15) << "Category"
               << std::setw(10) << "Good"
@@ -219,7 +219,7 @@ void SportsStoreProg::dispAllEquip()
     for (size_t i = 0; i < eqpmnts.size(); i++)
     {
         std::cout << std::left
-                  << std::setw(6)  << eqpmnts[i]->getType()
+                  << std::setw(6)  << i+1
                   << std::setw(20) << eqpmnts[i]->getName()
                   << std::setw(15) << eqpmnts[i]->getCateg()
                   << std::setw(10) << eqpmnts[i]->getGoodQ()
