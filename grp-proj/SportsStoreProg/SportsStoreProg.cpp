@@ -94,11 +94,13 @@ void SportsStoreProg::insEquip() {
         std::cout << "X to quit\n";
         std::cin >> equipType;
 
-        if (equipType != 'B' && equipType != 'R' && equipType != 'P')
+        if (equipType != 'B' && equipType != 'R' && equipType != 'P' && equipType != 'X')
         {
             std::cout << "Invalid input. Try again.\n";
             continue;
         }
+
+        if (equipType == 'X')   break;
 
         // Using loop condition that reads itemName from cin to continue looping
         // and returns false when Ctrl+Z is detected
