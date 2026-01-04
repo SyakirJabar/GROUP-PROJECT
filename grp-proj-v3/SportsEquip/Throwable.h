@@ -1,4 +1,4 @@
-//Projectile.h
+//Throwable.h
 //derived from SportsEquip
 #pragma once
 
