@@ -8,7 +8,7 @@ private:
 
 public:
     SportsStoreProg();  //constructor
-
+    ~SportsStoreProg();
 
     void insEquip();
     void displayAllEquip();
