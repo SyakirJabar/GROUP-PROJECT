@@ -280,6 +280,7 @@ void SportsStoreProg::printSummary()
     }
 
     int totalQty{0}, totalGood{0}, totalBroken{0}, totalLost{0};
+    double avgValue{0};
     double totalValue{0}, goodValue{0}, brokenValue{0}, lostValue{0};
 
     for (size_t i = 0; i < eqpmnts.size(); i++) {
@@ -287,26 +288,34 @@ void SportsStoreProg::printSummary()
         totalGood += eqpmnts[i]->getGoodQ();
         totalBroken += eqpmnts[i]->getBrokenQ();
         totalLost += eqpmnts[i]->getLostQ();
+
         totalValue += (eqpmnts[i]->getGoodQ() + eqpmnts[i]->getBrokenQ() 
                         + eqpmnts[i]->getLostQ()) * eqpmnts[i]->getUnitValRM();
         goodValue += eqpmnts[i]->getGoodQ() * eqpmnts[i]->getUnitValRM();
         brokenValue += eqpmnts[i]->getBrokenQ() * eqpmnts[i]->getUnitValRM();
         lostValue += eqpmnts[i]->getLostQ() * eqpmnts[i]->getUnitValRM();
+
+        avgValue = totalValue /  totalQty;
     }
 
     std::cout << "\n--- SPORTS STOREROOM: REPORT ---\n" << std::endl;
-    std::cout << "Total Item Records : " << eqpmnts.size() << std::endl;
-    std::cout << "Total Quantity     : " << totalQty << std::endl;
-    std::cout << "Total Good         : " << totalGood << std::endl;
-    std::cout << "Total Broken       : " << totalBroken << std::endl;
-    std::cout << "Total Lost         : " << totalLost << std::endl;
-    std::cout << "Total Value        : RM" << std::fixed << std::setprecision(2) 
+    std::cout << "Item Records              : " << eqpmnts.size() << std::endl;
+    
+    std::cout << "\nTotal Quantity            : " << totalQty << std::endl;
+    std::cout << "Total Good                : " << totalGood << std::endl;
+    std::cout << "Total Broken              : " << totalBroken << std::endl;
+    std::cout << "Total Lost                : " << totalLost << std::endl;
+
+    std::cout << "\nTotal Value               : RM" << std::fixed << std::setprecision(2) 
                 << totalValue << std::endl;
-    std::cout << "Total Good Value   : RM" << std::fixed << std::setprecision(2) 
+    std::cout << "Total Good Value          : RM" << std::fixed << std::setprecision(2) 
                 << goodValue << std::endl;
-    std::cout << "Total Broken Value : RM" << std::fixed << std::setprecision(2) 
+    std::cout << "Total Broken Value        : RM" << std::fixed << std::setprecision(2) 
                 << brokenValue << std::endl;
-    std::cout << "Total Lost Value   : RM" << std::fixed << std::setprecision(2) 
+    std::cout << "Total Lost Value          : RM" << std::fixed << std::setprecision(2) 
                 << lostValue << std::endl;
+
+    std::cout << "\nAverage Equipment Value   : RM" << std::fixed << std::setprecision(2) 
+            << avgValue << std::endl;
     std::cout << "\n-----------------------------\n\n";
 }
