@@ -7,6 +7,7 @@
 class Ball : public SportsEquip
 {
 private:
+    char type{'B'};
     str name;
     str categ;      //category of sports equipment
     int goodQ;      //quantity of ball not lost or broken
@@ -14,7 +15,7 @@ private:
     int lostQ;
     double unitValRM;
 
-public:\
+public:
     //constructors
     Ball(const str&, const str&, const int&, const int&, const int&, const double&);
     Ball();     //default
@@ -22,6 +23,7 @@ public:\
     ~Ball();    //destructor
 
     //getters
+    char getType() const override;
     str getName() const override;
     str getCateg() const override;
     int getGoodQ() const override;  

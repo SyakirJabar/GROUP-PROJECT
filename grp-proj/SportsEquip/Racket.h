@@ -7,6 +7,7 @@
 class Racket : public SportsEquip
 {
 private:
+    char type{'R'};
     str name;
     str categ;      //category of sports equipment
     int goodQ;      //quantity of ball not lost or broken
@@ -22,6 +23,7 @@ public:\
     ~Racket();    //destructor
 
     //getters
+    char getType() const override;
     str getName() const override;
     str getCateg() const override;
     int getGoodQ() const override;  

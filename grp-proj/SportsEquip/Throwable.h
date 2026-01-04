@@ -7,6 +7,7 @@
 class Throwable : public SportsEquip
 {
 private:
+    char type{'T'};
     str name;
     str categ;      //category of sports equipment
     int goodQ;      //quantity of ball not lost or broken

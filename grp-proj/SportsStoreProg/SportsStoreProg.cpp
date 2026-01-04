@@ -11,18 +11,28 @@ typedef std::string str;
 
 //constructor
 SportsStoreProg::SportsStoreProg()
-    : myFile{"StoreroomDate.txt"}
+    : myFile{"../StoreroomData.txt", std::ios::app}
 {
+
+    str name, categ;
+    int goodQ, brokenQ, lostQ;
+    double unitValRM;
+
+    while (myFile >> name >> categ >> goodQ >> brokenQ >> lostQ >> unitValRM)
+    {
+
+    }
+
     char usrIn{};
     bool exit{};
 
     std::cout << "Welcome\n";
-    std::cout << "-------\n";
+    std::cout << "-------";
 
     while (true)
     {
         
-        std::cout << "1. Insert Record\n";
+        std::cout << "\n1. Insert Record\n";
         std::cout << "2. Display All Records\n";
         std::cout << "3. Search Records\n";
         std::cout << "4. Print Report\n";
@@ -47,14 +57,15 @@ SportsStoreProg::SportsStoreProg()
         default : std::cout << "Invalid input. Try again...\n\n";
         }
 
-        // // Open file in Write Mode
-        // std::ofstream outFile("../StoreroomData.txt", std::ios::out);
+        // Open file in Write Mode
+        std::ofstream outFile("../StoreroomData.txt", std::ios::out);
 
         if (myFile.is_open()) {
             for (int i = 0; i < eqpmnts.size(); i++)
             {
             // Save raw data separated by spaces
-            myFile << eqpmnts[i]->getName() << " "
+            myFile <<eqpmnts[i]->getType() << " "
+                << eqpmnts[i]->getName() << " "
                 << eqpmnts[i]->getCateg() << " "
                 << eqpmnts[i]->getGoodQ() << " "
                 << eqpmnts[i]->getBrokenQ() << " "
@@ -65,9 +76,14 @@ SportsStoreProg::SportsStoreProg()
         else {
             std::cout << ">> Error: Unable to access StoreroomData.txt." << std::endl;
         }
+        // for (int i=0; i<eqpmnts.size(); i++)
+        // {
+        //     std::cout << eqpmnts[i]->getName() << " " << eqpmnts[i]->getUnitValRM() << "\n";
 
-        myFile.close();
+        // }
+
     }
+    myFile.close();
 }
 
 //destructor
@@ -107,11 +123,13 @@ void SportsStoreProg::insEquip() {
         // Using loop condition that reads itemName from cin to continue looping
         // and returns false when Ctrl+Z is detected
         std::cout << "\nEnter Item Name: ";
-        std::cin >> itemName;
+        std::cin.ignore();  // Clear leftover newline first
+        std::getline(std::cin, itemName);
 
         // Collect the rest of the data for this item
         std::cout << "Enter Item Category: ";
-        std::cin >> itemCateg;
+        std::cin.ignore();  // Clear leftover newline first
+        std::getline(std::cin, itemCateg);
 
         std::cout << "Enter Good Quantity: ";
         std::cin >> goodQty;

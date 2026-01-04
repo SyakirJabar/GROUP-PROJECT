@@ -23,6 +23,11 @@ Throwable::~Throwable()
 /*******************************/
 
 /*  GETTERS  */
+char Throwable::getType() const
+{
+    return type;
+}
+
 str Throwable::getName() const
 {
     return name;

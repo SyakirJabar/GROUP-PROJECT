@@ -23,6 +23,11 @@ Racket::~Racket()
 /*******************************/
 
 /*  GETTERS  */
+char Racket::getType() const
+{
+    return type;
+}
+
 str Racket::getName() const
 {
     return name;

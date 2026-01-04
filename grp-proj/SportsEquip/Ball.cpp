@@ -23,6 +23,11 @@ Ball::~Ball()
 /*******************************/
 
 /*  GETTERS  */
+char Ball::getType() const
+{
+    return type;
+}
+
 str Ball::getName() const
 {
     return name;

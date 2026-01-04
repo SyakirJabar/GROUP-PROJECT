@@ -13,6 +13,7 @@ public:
 
     //getters (virtual)
     //does not modify object representation
+    virtual char getType() const = 0;
     virtual str getName() const = 0;
     virtual str getCateg() const = 0;        //category of sports equipment
     virtual int getGoodQ() const = 0;        //quantity of equipments not broken or lost
