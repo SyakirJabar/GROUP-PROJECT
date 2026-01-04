@@ -52,10 +52,12 @@ SportsStoreProg::SportsStoreProg()
 SportsStoreProg::~SportsStoreProg()
 {}
 
-void insEquip() {
-    str itemName;
-    int quantity, brokenQty, lostQty;
+void SportsStoreProg::insEquip() {
+    str itemName, itemCateg;
+    int goodQty, brokenQty, lostQty;
     double unitValue;
+    //unique pointer to an object that is derived from SportsEquip (base) class
+    std::unique_ptr<SportsEquip> sportsEquip{nullptr};   
 
     std::cout << "\n--- SPORT STOREROOM: INSERT MODE ---" << std::endl;
     std::cout << "(Press Ctrl+Z then Enter to stop and return to menu)" << std::endl;
@@ -65,18 +67,29 @@ void insEquip() {
         char equipType{};
 
         // Prompt user to enter type of sports equipment
+        std::cout << "Enter type of equipments\n";
         std::cout << "[B]all\n";
         std::cout << "[R]acket\n";
         std::cout << "[P]rojectile\n";
         std::cin >> equipType;
 
+        if (equipType != 'B' && equipType != 'R' && equipType != 'P')
+        {
+            std::cout << "Invalid input. Try again.\n";
+            continue;
+        }
+
         // Using loop condition that reads itemName from cin to continue looping
         // and returns false when Ctrl+Z is detected
         std::cout << "\nEnter Item Name: ";
+        std::cin >> itemName;
 
         // Collect the rest of the data for this item
+        std::cout << "Enter Item Category: ";
+        std::cin >> itemCateg;
+
         std::cout << "Enter Total Quantity: ";
-        std::cin >> quantity;
+        std::cin >> goodQty;
 
         std::cout << "Enter Broken Quantity: ";
         std::cin >> brokenQty;
@@ -87,7 +100,21 @@ void insEquip() {
         std::cout << "Enter Estimate Value per Unit (RM): ";
         std::cin >> unitValue;
 
-        std::
+        switch(equipType)
+        {
+        case 'B':   sportsEquip = std::make_unique<Ball> 
+                            (Ball(itemName, itemCateg, brokenQty, lostQty, unitValue));
+                    break;
+
+        case 'R':   sportsEquip = std::make_unique<Racket> 
+                            (Racket(itemName, itemCateg, brokenQty, lostQty, unitValue));
+                    break;
+
+        case 'P':   sportsEquip = std::make_unique<Projectile> 
+                            (Projectile(itemName, itemCateg, brokenQty, lostQty, unitValue));
+        }
+
+        eqpmnts.push_back(std::move(sportsEquip));
 
         // Open file in Append Mode
         std::ofstream outFile("StoreroomData.txt", std::ios::app);
@@ -95,7 +122,7 @@ void insEquip() {
         if (outFile.is_open()) {
             // Save raw data separated by spaces
             outFile << itemName << " "
-                << quantity << " "
+                << itemCateg << " "
                 << brokenQty << " "
                 << lostQty << " "
                 << std::fixed << std::setprecision(2) << unitValue << std::endl;

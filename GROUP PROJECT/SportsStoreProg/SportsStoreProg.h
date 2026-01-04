@@ -1,10 +1,17 @@
 //SportsStoreProg.h
 #pragma once
 
+#include "../SportsEquip/Ball.h"
+#include "../SportsEquip/Racket.h"
+#include "../SportsEquip/Projectile.h"
+#include <vector>
+#include <memory>
+
 struct SportsStoreProg
 {
 private:
-    std::vector<std::unique_ptr<Equipment>> eqpmnts;  //sports equipments
+    //vector storing pointers to objects of classes derived from SportsEquip (base) class
+    std::vector<std::unique_ptr<SportsEquip>> eqpmnts;  //sports equipments
 
 public:
     SportsStoreProg();      //constructor
