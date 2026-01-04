@@ -32,4 +32,19 @@ str Ball::getCateg() const
 {
     return categ;
 }
+
+int Ball::getGoodQ() const
+{
+    return goodQ;
+}
+
+int Ball::getBrokenQ() const
+{
+    return brokenQ;
+}
+
+int Ball::getLostQ() const
+{
+    return lostQ;
+}
 /*******************************/
