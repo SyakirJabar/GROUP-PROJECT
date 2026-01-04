@@ -23,6 +23,7 @@ public:
     ~Throwable();    //destructor
 
     //getters
+    char getType() const override;
     str getName() const override;
     str getCateg() const override;
     int getGoodQ() const override;  
