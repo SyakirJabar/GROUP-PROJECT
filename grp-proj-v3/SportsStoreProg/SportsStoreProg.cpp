@@ -15,14 +15,17 @@ SportsStoreProg::SportsStoreProg()
 {
     std::ofstream tStampRecord("SysAccessRecords.txt", std::ios::app);
 
-    // Get the timestamp for the current date and time
-    time_t timestamp;
-    time(&timestamp);
+    if (tStampRecord.is_open())
+    {
+        // Get the timestamp for the current date and time
+        time_t timestamp;
+        time(&timestamp);
 
-    // Display the date and time represented by the timestamp
-    tStampRecord << ctime(&timestamp);
+        // Display the date and time represented by the timestamp
+        tStampRecord << ctime(&timestamp);
 
-    tStampRecord.close();
+        tStampRecord.close();
+    }
 
     char type;
     str name, categ;
