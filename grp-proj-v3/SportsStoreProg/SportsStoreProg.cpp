@@ -120,11 +120,11 @@ void SportsStoreProg::insEquip() {
 
         // Prompt user to enter type of sports equipment
         std::cout << "\nEnter type of sports equipment\n";
-        std::cout << "[B]all - objects launched into the air by kicking/hitting it \n";
-        std::cout << "[R]acket\n";
-        std::cout << "[T]hrowable\n";
-        std::cout << "[S]tick\n";
-        std::cout << "[H]elmet\n";
+        std::cout << "[B]all - object launched into the air by hitting another object, e.g. soccer ball, volley ball\n";
+        std::cout << "[R]acket - item used to hit a ball\n";
+        std::cout << "[T]hrowable - item made to be thrown, e.g. javelin spear\n";
+        std::cout << "[S]tick - item look like a stick (not meant to be thrown), e.g. bat, hockey stick\n";
+        std::cout << "[H]elmet - to be worn on the head\n";
         std::cout << "Q to quit\n";
         std::cout << "------------\n";
         std::cout << "Equipment type: ";
@@ -132,7 +132,8 @@ void SportsStoreProg::insEquip() {
 
 
         if (std::tolower(equipType) != 'b' && std::tolower(equipType) != 'r' 
-            && std::tolower(equipType) != 't' && std::tolower(equipType) != 'q')
+            && std::tolower(equipType) != 't' && std::tolower(equipType) != 's'
+            && std::tolower(equipType) != 'h' && std::tolower(equipType) != 'q')
         {
             std::cout << "Invalid input. Try again.\n";
             continue;
