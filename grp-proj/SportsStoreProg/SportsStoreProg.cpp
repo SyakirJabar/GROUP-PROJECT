@@ -91,6 +91,7 @@ void SportsStoreProg::insEquip() {
         std::cout << "[B]all\n";
         std::cout << "[R]acket\n";
         std::cout << "[P]rojectile\n";
+        std::cout << "X to quit\n";
         std::cin >> equipType;
 
         if (equipType != 'B' && equipType != 'R' && equipType != 'P')
@@ -155,8 +156,8 @@ void SportsStoreProg::insEquip() {
         // }
     }
     // Clearing to ensure selection menu works after ctrl+Z
-    std::cin.clear();
-    std::cout << "\n>> Item entry complete. Returning to system..." << std::endl;
+    // std::cin.clear();
+    // std::cout << "\n>> Item entry complete. Returning to system..." << std::endl;
 }
 
 void SportsStoreProg::dispAllEquip()
