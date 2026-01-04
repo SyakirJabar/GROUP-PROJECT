@@ -1,5 +1,6 @@
 //SportsEquip.h
 //base (abstract) class
+#pragma once
 
 #include <string>
 
