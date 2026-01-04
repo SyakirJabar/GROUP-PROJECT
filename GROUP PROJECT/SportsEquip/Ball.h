@@ -20,17 +20,10 @@ public:\
 
     ~Ball();    //destructor
 
-    //setters
-    void setName(const str&) override;
-    void setCateg(const str&) override;  
-    void setGoodQ(const int&) override;  
-    void setBrokenQ(const int&) override;
-    void setLostQ(const int&) override;
-
     //getters
     str getName() const override;
-    str setCateg() const override;
-    int setGoodQ() const override;  
-    int setBrokenQ() const override;
-    int setLostQ() const override;
+    str getCateg() const override;
+    int getGoodQ() const override;  
+    int getBrokenQ() const override;
+    int getLostQ() const override;
 };

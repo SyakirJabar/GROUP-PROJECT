@@ -14,8 +14,8 @@ public:
     //getters (virtual)
     //does not modify object representation
     virtual str getName() const = 0;
-    virtual str setCateg() const = 0;        //category of sports equipment
-    virtual int setGoodQ() const = 0;        //quantity of equipments not broken or lost
-    virtual int setBrokenQ() const = 0;
-    virtual int setLostQ() const = 0;
+    virtual str getCateg() const = 0;        //category of sports equipment
+    virtual int getGoodQ() const = 0;        //quantity of equipments not broken or lost
+    virtual int getBrokenQ() const = 0;
+    virtual int getLostQ() const = 0;
 };  
