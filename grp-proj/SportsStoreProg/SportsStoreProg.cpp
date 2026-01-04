@@ -165,28 +165,7 @@ void SportsStoreProg::insEquip() {
         }
 
         eqpmnts.push_back(std::move(sportsEquip));
-
-        // // Open file in Append Mode
-        // std::ofstream outFile("StoreroomData.txt", std::ios::app);
-
-        // if (outFile.is_open()) {
-        //     // Save raw data separated by spaces
-        //     outFile << itemName << " "
-        //         << itemCateg << " "
-        //         << brokenQty << " "
-        //         << lostQty << " "
-        //         << std::fixed << std::setprecision(2) << unitValue << std::endl;
-
-        //     outFile.close();
-        //     std::cout << ">> '" << itemName << "' saved successfully." << std::endl;
-        // }
-        // else {
-        //     std::cout << ">> Error: Unable to access StoreroomData.txt." << std::endl;
-        // }
     }
-    // Clearing to ensure selection menu works after ctrl+Z
-    // std::cin.clear();
-    // std::cout << "\n>> Item entry complete. Returning to system..." << std::endl;
 }
 
 void SportsStoreProg::dispAllEquip()
@@ -199,44 +178,29 @@ void SportsStoreProg::searchEquip()
     str searchItem, itemName;
     int quantity, brokenQty, lostQty;
     double unitValue;
-    bool found = false;
+    bool found{false};
 
     std::cout << "\n--- SEARCH / RETRIEVE MODE ---" << std::endl;
     std::cout << "Enter item name to search: ";
-    std::cin >> searchItem;
+    std::cin.ignore();
+    std::getline(std::cin, itemName);
 
-    // std::ifstream inFile("StoreroomData.txt");
-
-    // if (!inFile.is_open()) {
-    //     std::cout << ">> Error: Cannot open StoreroomData.txt." << std::endl;
-    //     return;
-    // }
-
-    std::ifstream inFile("../StoreroomData.txt");
-    // Read data exactly in the same order as saved
-    while (inFile >> itemName >> quantity >> brokenQty >> lostQty >> unitValue) {
-
-        if (itemName == searchItem) {
-            double totalValue = quantity * unitValue;
-            double brokenValue = brokenQty * unitValue;
-            double lostValue = lostQty * unitValue;
-
-            std::cout << "\nItem Found!" << std::endl;
-            std::cout << "Item Name       : " << itemName << std::endl;
-            std::cout << "Total Quantity  : " << quantity << std::endl;
-            std::cout << "Broken Quantity : " << brokenQty << std::endl;
-            std::cout << "Lost Quantity   : " << lostQty << std::endl;
-            std::cout << "Unit Value (RM) : " << std::fixed << std::setprecision(2) << unitValue << std::endl;
-            std::cout << "Total Value     : RM" << totalValue << std::endl;
-            std::cout << "Broken Value    : RM" << brokenValue << std::endl;
-            std::cout << "Lost Value      : RM" << lostValue << std::endl;
-
+    int i = 0;
+    for (; i < eqpmnts.size(); i++)
+    {
+        if (itemName == eqpmnts[i]->getName()) 
+        {
             found = true;
+            std::cout << ">> Item found!";
+            std::cout << "\nName: " << eqpmnts[i]->getName() << "\n";
+            std::cout << "Category: " << eqpmnts[i]->getCateg() << "\n";
+            std::cout << "Good Quantity: " << eqpmnts[i]->getGoodQ() << "\n";
+            std::cout << "Broken Quantity: " << eqpmnts[i]->getBrokenQ() << "\n";
+            std::cout << "Lost Quantity: " << eqpmnts[i]->getLostQ() << "\n";
+            std::cout << "Value per unit (RM): " << eqpmnts[i]->getUnitValRM() << "\n";
             break;
         }
     }
-
-    inFile.close();
 
     if (!found) {
         std::cout << "\n>> Item not found." << std::endl;
