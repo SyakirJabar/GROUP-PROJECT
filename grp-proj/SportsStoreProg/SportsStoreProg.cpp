@@ -11,7 +11,6 @@ typedef std::string str;
 
 //constructor
 SportsStoreProg::SportsStoreProg()
-    : myFile{"../StoreroomData.txt", std::ios::out}
 {
     char type;
     str name, categ;
@@ -19,7 +18,9 @@ SportsStoreProg::SportsStoreProg()
     double unitValRM;
     std::unique_ptr<SportsEquip> sportsEquip;
 
-    while (myFile >> type >> name >> categ >> goodQ >> brokenQ >> lostQ >> unitValRM)
+    std::ifstream inFile("StoreroomData.txt");
+
+    while (inFile >> type >> name >> categ >> goodQ >> brokenQ >> lostQ >> unitValRM)
     {
         switch (type)
         {
@@ -35,13 +36,15 @@ SportsStoreProg::SportsStoreProg()
 
         eqpmnts.push_back(std::move(sportsEquip));
     }
+    inFile.close();
 
     char usrIn{};
     bool exit{};
 
+    std::ofstream outFile("StoreroomData.txt", std::ios::out);
+
     std::cout << "Welcome\n";
     std::cout << "-------";
-
     while (true)
     {
         
@@ -70,11 +73,12 @@ SportsStoreProg::SportsStoreProg()
         default : std::cout << "Invalid input. Try again...\n\n";
         }
         
-        if (myFile.is_open()) {
+        
+        if (outFile.is_open()) {
             for (int i = 0; i < eqpmnts.size(); i++)
             {
             // Save raw data separated by spaces
-            myFile <<eqpmnts[i]->getType() << " "
+            outFile <<eqpmnts[i]->getType() << " "
                 << eqpmnts[i]->getName() << " "
                 << eqpmnts[i]->getCateg() << " "
                 << eqpmnts[i]->getGoodQ() << " "
@@ -93,7 +97,7 @@ SportsStoreProg::SportsStoreProg()
         // }
 
     }
-    myFile.close();
+    outFile.close();
 }
 
 //destructor
@@ -216,8 +220,9 @@ void SportsStoreProg::searchEquip()
     //     return;
     // }
 
+    std::ifstream inFile("../StoreroomData.txt");
     // Read data exactly in the same order as saved
-    while (myFile >> itemName >> quantity >> brokenQty >> lostQty >> unitValue) {
+    while (inFile >> itemName >> quantity >> brokenQty >> lostQty >> unitValue) {
 
         if (itemName == searchItem) {
             double totalValue = quantity * unitValue;
@@ -239,7 +244,7 @@ void SportsStoreProg::searchEquip()
         }
     }
 
-    myFile.close();
+    inFile.close();
 
     if (!found) {
         std::cout << "\n>> Item not found." << std::endl;
