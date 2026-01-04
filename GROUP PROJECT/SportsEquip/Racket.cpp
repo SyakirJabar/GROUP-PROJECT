@@ -47,4 +47,9 @@ int Racket::getLostQ() const
 {
     return lostQ;
 }
+
+double Racket::getUnitValRM() const
+{
+    return unitValRM;
+}
 /*******************************/

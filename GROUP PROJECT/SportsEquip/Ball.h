@@ -12,6 +12,7 @@ private:
     int goodQ;      //quantity of ball not lost or broken
     int brokenQ;
     int lostQ;
+    double unitValRM;
 
 public:\
     //constructors
@@ -26,4 +27,5 @@ public:\
     int getGoodQ() const override;  
     int getBrokenQ() const override;
     int getLostQ() const override;
+    double getUnitValRM() const override;
 };

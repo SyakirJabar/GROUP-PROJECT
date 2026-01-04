@@ -60,10 +60,19 @@ void insEquip() {
     std::cout << "\n--- SPORT STOREROOM: INSERT MODE ---" << std::endl;
     std::cout << "(Press Ctrl+Z then Enter to stop and return to menu)" << std::endl;
 
-    // Using loop condition that reads itemName from cin to continue looping
-    // and returns false when Ctrl+Z is detected
-    std::cout << "\nEnter Item Name: ";
-    while (std::cin >> itemName) {
+
+    while (true) {
+        char equipType{};
+
+        // Prompt user to enter type of sports equipment
+        std::cout << "[B]all\n";
+        std::cout << "[R]acket\n";
+        std::cout << "[P]rojectile\n";
+        std::cin >> equipType;
+
+        // Using loop condition that reads itemName from cin to continue looping
+        // and returns false when Ctrl+Z is detected
+        std::cout << "\nEnter Item Name: ";
 
         // Collect the rest of the data for this item
         std::cout << "Enter Total Quantity: ";
@@ -77,6 +86,8 @@ void insEquip() {
 
         std::cout << "Enter Estimate Value per Unit (RM): ";
         std::cin >> unitValue;
+
+        std::
 
         // Open file in Append Mode
         std::ofstream outFile("StoreroomData.txt", std::ios::app);
@@ -95,9 +106,6 @@ void insEquip() {
         else {
             std::cout << ">> Error: Unable to access StoreroomData.txt." << std::endl;
         }
-
-        // Prompt for the next name to keep the loop going
-        std::cout << "\nEnter Item Name: ";
     }
     // Clearing to ensure selection menu works after ctrl+Z
     std::cin.clear();

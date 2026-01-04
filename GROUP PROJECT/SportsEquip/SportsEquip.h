@@ -18,4 +18,5 @@ public:
     virtual int getGoodQ() const = 0;        //quantity of equipments not broken or lost
     virtual int getBrokenQ() const = 0;
     virtual int getLostQ() const = 0;
+    virtual double getUnitValRM() const = 0;
 };  

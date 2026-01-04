@@ -47,4 +47,9 @@ int Ball::getLostQ() const
 {
     return lostQ;
 }
+
+double Ball::getUnitValRM() const
+{
+    return unitValRM;
+}
 /*******************************/

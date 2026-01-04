@@ -47,4 +47,9 @@ int Projectile::getLostQ() const
 {
     return lostQ;
 }
+
+double Projectile::getUnitValRM() const
+{
+    return unitValRM;
+}
 /*******************************/
