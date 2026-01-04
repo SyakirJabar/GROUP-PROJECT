@@ -18,7 +18,7 @@ SportsStoreProg::SportsStoreProg()
     double unitValRM;
     std::unique_ptr<SportsEquip> sportsEquip;
 
-    std::ifstream inFile("StoreroomData.txt");
+    std::ifstream inFile("../StoreroomData.txt");
 
     while (inFile >> type >> name >> categ >> goodQ >> brokenQ >> lostQ >> unitValRM)
     {
@@ -41,13 +41,11 @@ SportsStoreProg::SportsStoreProg()
     char usrIn{};
     bool exit{};
 
-    std::ofstream outFile("StoreroomData.txt", std::ios::out);
-
+    bool loop{true};
     std::cout << "Welcome\n";
     std::cout << "-------";
-    while (true)
+    while (loop)
     {
-        
         std::cout << "\n1. Insert Record\n";
         std::cout << "2. Display All Records\n";
         std::cout << "3. Search Records\n";
@@ -68,35 +66,30 @@ SportsStoreProg::SportsStoreProg()
                   break;
         case '4': printSummary();
                   break;
-        case 'q': return;
+        case 'q': loop = false;
                   break;
         default : std::cout << "Invalid input. Try again...\n\n";
         }
-        
-        
-        if (outFile.is_open()) {
-            for (int i = 0; i < eqpmnts.size(); i++)
-            {
-            // Save raw data separated by spaces
-            outFile <<eqpmnts[i]->getType() << " "
-                << eqpmnts[i]->getName() << " "
-                << eqpmnts[i]->getCateg() << " "
-                << eqpmnts[i]->getGoodQ() << " "
-                << eqpmnts[i]->getBrokenQ() << " "
-                << eqpmnts[i]->getLostQ() << " "
-                << std::fixed << std::setprecision(2) << eqpmnts[i]->getUnitValRM() << std::endl;
-            }
-        }
-        else {
-            std::cout << ">> Error: Unable to access StoreroomData.txt." << std::endl;
-        }
-        // for (int i=0; i<eqpmnts.size(); i++)
-        // {
-        //     std::cout << eqpmnts[i]->getName() << " " << eqpmnts[i]->getUnitValRM() << "\n";
-
-        // }
-
     }
+
+    std::ofstream outFile("../StoreroomData.txt", std::ios::out);
+    if (outFile.is_open()) {
+        for (int i = 0; i < eqpmnts.size(); i++)
+        {
+        // Save raw data separated by spaces
+        outFile <<eqpmnts[i]->getType() << " "
+            << eqpmnts[i]->getName() << " "
+            << eqpmnts[i]->getCateg() << " "
+            << eqpmnts[i]->getGoodQ() << " "
+            << eqpmnts[i]->getBrokenQ() << " "
+            << eqpmnts[i]->getLostQ() << " "
+            << std::fixed << std::setprecision(2) << eqpmnts[i]->getUnitValRM() << std::endl;
+        }
+    }
+    else 
+    {
+        std::cout << ">> Error: Unable to access StoreroomData.txt." << std::endl;
+    } 
     outFile.close();
 }
 
@@ -142,7 +135,6 @@ void SportsStoreProg::insEquip() {
 
         // Collect the rest of the data for this item
         std::cout << "Enter Item Category: ";
-        std::cin.ignore();  // Clear leftover newline first
         std::getline(std::cin, itemCateg);
 
         std::cout << "Enter Good Quantity: ";
