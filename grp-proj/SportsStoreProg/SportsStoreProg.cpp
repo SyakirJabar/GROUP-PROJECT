@@ -61,11 +61,12 @@ SportsStoreProg::SportsStoreProg()
                 << eqpmnts[i]->getLostQ() << " "
                 << std::fixed << std::setprecision(2) << eqpmnts[i]->getUnitValRM() << std::endl;
             }
-            myFile.close();
         }
         else {
             std::cout << ">> Error: Unable to access StoreroomData.txt." << std::endl;
         }
+
+        myFile.close();
     }
 }
 
@@ -88,7 +89,7 @@ void SportsStoreProg::insEquip() {
         char equipType{};
 
         // Prompt user to enter type of sports equipment
-        std::cout << "Enter type of equipments\n";
+        std::cout << "\nEnter type of equipments\n";
         std::cout << "[B]all\n";
         std::cout << "[R]acket\n";
         std::cout << "[T]hrowable\n";
