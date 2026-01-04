@@ -4,6 +4,7 @@
 #include "../SportsEquip/Ball.h"
 #include "../SportsEquip/Racket.h"
 #include "../SportsEquip/Throwable.h"
+#include <fstream>
 #include <vector>
 #include <memory>
 
@@ -12,6 +13,7 @@ struct SportsStoreProg
 private:
     //vector storing pointers to objects of classes derived from SportsEquip (base) class
     std::vector<std::unique_ptr<SportsEquip>> eqpmnts;  //sports equipments
+    std::fstream myFile;
 
 public:
     SportsStoreProg();      //constructor

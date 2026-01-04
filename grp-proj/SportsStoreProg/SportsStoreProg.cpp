@@ -11,6 +11,7 @@ typedef std::string str;
 
 //constructor
 SportsStoreProg::SportsStoreProg()
+    : myFile{"StoreroomDate.txt"}
 {
     char usrIn{};
     bool exit{};
@@ -46,21 +47,21 @@ SportsStoreProg::SportsStoreProg()
         default : std::cout << "Invalid input. Try again...\n\n";
         }
 
-        // Open file in Write Mode
-        std::ofstream outFile("../StoreroomData.txt", std::ios::out);
+        // // Open file in Write Mode
+        // std::ofstream outFile("../StoreroomData.txt", std::ios::out);
 
-        if (outFile.is_open()) {
+        if (myFile.is_open()) {
             for (int i = 0; i < eqpmnts.size(); i++)
             {
             // Save raw data separated by spaces
-            outFile << eqpmnts[i]->getName() << " "
+            myFile << eqpmnts[i]->getName() << " "
                 << eqpmnts[i]->getCateg() << " "
                 << eqpmnts[i]->getGoodQ() << " "
                 << eqpmnts[i]->getBrokenQ() << " "
                 << eqpmnts[i]->getLostQ() << " "
                 << std::fixed << std::setprecision(2) << eqpmnts[i]->getUnitValRM() << std::endl;
             }
-            outFile.close();
+            myFile.close();
         }
         else {
             std::cout << ">> Error: Unable to access StoreroomData.txt." << std::endl;
@@ -179,15 +180,15 @@ void SportsStoreProg::searchEquip()
     std::cout << "Enter item name to search: ";
     std::cin >> searchItem;
 
-    std::ifstream inFile("StoreroomData.txt");
+    // std::ifstream inFile("StoreroomData.txt");
 
-    if (!inFile.is_open()) {
-        std::cout << ">> Error: Cannot open StoreroomData.txt." << std::endl;
-        return;
-    }
+    // if (!inFile.is_open()) {
+    //     std::cout << ">> Error: Cannot open StoreroomData.txt." << std::endl;
+    //     return;
+    // }
 
     // Read data exactly in the same order as saved
-    while (inFile >> itemName >> quantity >> brokenQty >> lostQty >> unitValue) {
+    while (myFile >> itemName >> quantity >> brokenQty >> lostQty >> unitValue) {
 
         if (itemName == searchItem) {
             double totalValue = quantity * unitValue;
@@ -209,7 +210,7 @@ void SportsStoreProg::searchEquip()
         }
     }
 
-    inFile.close();
+    myFile.close();
 
     if (!found) {
         std::cout << "\n>> Item not found." << std::endl;
