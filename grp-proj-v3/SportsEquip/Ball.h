@@ -8,6 +8,12 @@ class Ball : public SportsEquip
 {
 private:
     char type{'B'};
+    str name;
+    str categ;      //category of sports equipment
+    int goodQ;      //quantity of ball not lost or broken
+    int brokenQ;
+    int lostQ;
+    double unitValRM;
 
 public:
     //constructors
