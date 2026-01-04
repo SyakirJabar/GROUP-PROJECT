@@ -185,7 +185,41 @@ void SportsStoreProg::insEquip() {
 
 void SportsStoreProg::dispAllEquip()
 {
+    if (eqpmnts.empty()) {
+        std::cout << "\nNo records to display!" << std::endl;
+        return;
+    }
 
+    std::cout << "\n--- ALL EQUIPMENT RECORDS ---\n\n";
+    
+    // Header row
+    std::cout << std::left
+              << std::setw(6)  << "Type"
+              << std::setw(20) << "Name"
+              << std::setw(15) << "Category"
+              << std::setw(10) << "Good"
+              << std::setw(10) << "Broken"
+              << std::setw(10) << "Lost"
+              << std::setw(12) << "Unit (RM)" << "\n";
+    
+    // Separator line
+    std::cout << std::string(83, '-') << "\n";
+    
+    // Data rows
+    for (int i = 0; i < eqpmnts.size(); i++)
+    {
+        std::cout << std::left
+                  << std::setw(6)  << eqpmnts[i]->getType()
+                  << std::setw(20) << eqpmnts[i]->getName()
+                  << std::setw(15) << eqpmnts[i]->getCateg()
+                  << std::setw(10) << eqpmnts[i]->getGoodQ()
+                  << std::setw(10) << eqpmnts[i]->getBrokenQ()
+                  << std::setw(10) << eqpmnts[i]->getLostQ()
+                  << std::setw(12) << std::fixed << std::setprecision(2) << eqpmnts[i]->getUnitValRM() << "\n";
+    }
+    
+    std::cout << std::string(83, '-') << "\n";
+    std::cout << "Total records: " << eqpmnts.size() << "\n";
 }
 
 void SportsStoreProg::searchEquip()
