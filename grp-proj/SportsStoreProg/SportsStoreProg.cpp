@@ -11,16 +11,29 @@ typedef std::string str;
 
 //constructor
 SportsStoreProg::SportsStoreProg()
-    : myFile{"../StoreroomData.txt", std::ios::app}
+    : myFile{"../StoreroomData.txt", std::ios::out}
 {
-
+    char type;
     str name, categ;
     int goodQ, brokenQ, lostQ;
     double unitValRM;
+    std::unique_ptr<SportsEquip> sportsEquip;
 
-    while (myFile >> name >> categ >> goodQ >> brokenQ >> lostQ >> unitValRM)
+    while (myFile >> type >> name >> categ >> goodQ >> brokenQ >> lostQ >> unitValRM)
     {
+        switch (type)
+        {
+        case 'B':   sportsEquip = std::make_unique<Ball>(Ball(name, categ, goodQ, brokenQ, lostQ, unitValRM));
+                    break;
 
+        case 'R':   sportsEquip = std::make_unique<Racket>(Racket(name, categ, goodQ, brokenQ, lostQ, unitValRM));
+                    break;
+
+        case 'T':   sportsEquip = std::make_unique<Throwable>(Throwable(name, categ, goodQ, brokenQ, lostQ, unitValRM));
+                    break;
+        }
+
+        eqpmnts.push_back(std::move(sportsEquip));
     }
 
     char usrIn{};
@@ -56,10 +69,7 @@ SportsStoreProg::SportsStoreProg()
                   break;
         default : std::cout << "Invalid input. Try again...\n\n";
         }
-
-        // Open file in Write Mode
-        std::ofstream outFile("../StoreroomData.txt", std::ios::out);
-
+        
         if (myFile.is_open()) {
             for (int i = 0; i < eqpmnts.size(); i++)
             {
