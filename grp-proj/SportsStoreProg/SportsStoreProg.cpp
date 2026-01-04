@@ -120,8 +120,6 @@ void SportsStoreProg::insEquip() {
     std::unique_ptr<SportsEquip> sportsEquip{nullptr};   
 
     std::cout << "\n--- SPORT STOREROOM: INSERT MODE ---" << std::endl;
-    std::cout << "(Press Ctrl+Z then Enter to stop and return to menu)" << std::endl;
-
 
     while (true) {
         char equipType{};
