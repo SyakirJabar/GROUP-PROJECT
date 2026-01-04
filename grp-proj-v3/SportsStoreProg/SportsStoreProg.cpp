@@ -33,7 +33,13 @@ SportsStoreProg::SportsStoreProg()
 
         case 'T':   sportsEquip = std::make_unique<Throwable>(Throwable(name, categ, goodQ, brokenQ, lostQ, unitValRM));
                     break;
-        }
+
+        case 'S':   sportsEquip = std::make_unique<Stick>(Stick(name, categ, goodQ, brokenQ, lostQ, unitValRM));
+            break;
+
+        case 'H':   sportsEquip = std::make_unique<Helmet>(Helmet(name, categ, goodQ, brokenQ, lostQ, unitValRM));
+            break;
+        }       
 
         eqpmnts.push_back(std::move(sportsEquip));  //transfer pointer ownership from sportsEquip
     }
@@ -114,9 +120,11 @@ void SportsStoreProg::insEquip() {
 
         // Prompt user to enter type of sports equipment
         std::cout << "\nEnter type of sports equipment\n";
-        std::cout << "[B]all\n";
+        std::cout << "[B]all - objects launched into the air by kicking/hitting it \n";
         std::cout << "[R]acket\n";
         std::cout << "[T]hrowable\n";
+        std::cout << "[S]tick\n";
+        std::cout << "[H]elmet\n";
         std::cout << "Q to quit\n";
         std::cout << "------------\n";
         std::cout << "Equipment type: ";
@@ -167,6 +175,14 @@ void SportsStoreProg::insEquip() {
         case 'T':   sportsEquip = std::make_unique<Throwable> 
                             (Throwable(itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue));
                     break;
+
+        case 'S':   sportsEquip = std::make_unique<Stick> 
+                        (Stick(itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue));
+                break;
+
+        case 'H':   sportsEquip = std::make_unique<Helmet> 
+                        (Helmet(itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue));
+                break;
         }
 
         //transfer ownership sportsEquip from pointer sportsEquip

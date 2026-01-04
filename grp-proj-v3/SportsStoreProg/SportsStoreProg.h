@@ -4,6 +4,8 @@
 #include "../SportsEquip/Ball.h"
 #include "../SportsEquip/Racket.h"
 #include "../SportsEquip/Throwable.h"
+#include "../SportsEquip/Stick.h"
+#include "../SportsEquip/Helmet.h"
 #include <fstream>
 #include <vector>
 #include <memory>
