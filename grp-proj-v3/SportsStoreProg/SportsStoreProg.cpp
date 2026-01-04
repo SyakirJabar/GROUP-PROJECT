@@ -25,19 +25,19 @@ SportsStoreProg::SportsStoreProg()
     {
         switch (type)
         {
-        case 'B':   sportsEquip = std::make_unique<Ball>(Ball(name, categ, goodQ, brokenQ, lostQ, unitValRM));
+        case 'B':   sportsEquip = std::make_unique<Ball>(name, categ, goodQ, brokenQ, lostQ, unitValRM);
                     break;
 
-        case 'R':   sportsEquip = std::make_unique<Racket>(Racket(name, categ, goodQ, brokenQ, lostQ, unitValRM));
+        case 'R':   sportsEquip = std::make_unique<Racket>(name, categ, goodQ, brokenQ, lostQ, unitValRM);
                     break;
 
-        case 'T':   sportsEquip = std::make_unique<Throwable>(Throwable(name, categ, goodQ, brokenQ, lostQ, unitValRM));
+        case 'T':   sportsEquip = std::make_unique<Throwable>(name, categ, goodQ, brokenQ, lostQ, unitValRM);
                     break;
 
-        case 'S':   sportsEquip = std::make_unique<Stick>(Stick(name, categ, goodQ, brokenQ, lostQ, unitValRM));
+        case 'S':   sportsEquip = std::make_unique<Stick>(name, categ, goodQ, brokenQ, lostQ, unitValRM);
             break;
 
-        case 'H':   sportsEquip = std::make_unique<Helmet>(Helmet(name, categ, goodQ, brokenQ, lostQ, unitValRM));
+        case 'H':   sportsEquip = std::make_unique<Helmet>(name, categ, goodQ, brokenQ, lostQ, unitValRM);
             break;
         }       
 
@@ -140,6 +140,8 @@ void SportsStoreProg::insEquip() {
 
         if (std::tolower(equipType) == 'q')   break;
 
+        equipType = std::tolower(equipType);
+
         // Using loop condition that reads itemName from cin to continue looping
         // and returns false when Ctrl+Z is detected
         std::cout << "\nName (NO spaces): ";
@@ -164,24 +166,24 @@ void SportsStoreProg::insEquip() {
         //instantiate SportsEquip derivation depending on equipment type
         switch(equipType)
         {
-        case 'B':   sportsEquip = std::make_unique<Ball> 
-                            (Ball(itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue));
+        case 'b':   sportsEquip = std::make_unique<Ball> 
+                            (itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue);
                     break;
 
-        case 'R':   sportsEquip = std::make_unique<Racket> 
-                            (Racket(itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue));
+        case 'r':   sportsEquip = std::make_unique<Racket> 
+                            (itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue);
                     break;
 
-        case 'T':   sportsEquip = std::make_unique<Throwable> 
-                            (Throwable(itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue));
+        case 't':   sportsEquip = std::make_unique<Throwable> 
+                            (itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue);
                     break;
 
-        case 'S':   sportsEquip = std::make_unique<Stick> 
-                        (Stick(itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue));
+        case 's':   sportsEquip = std::make_unique<Stick> 
+                        (itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue);
                 break;
 
-        case 'H':   sportsEquip = std::make_unique<Helmet> 
-                        (Helmet(itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue));
+        case 'h':   sportsEquip = std::make_unique<Helmet> 
+                        (itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue);
                 break;
         }
 
@@ -236,13 +238,13 @@ void SportsStoreProg::dispAllEquip()
 void SportsStoreProg::searchEquip()
 {
     str itemName;
-    bool found{false};
-
     
         std::cout << "\n--- SPORTS STOREROOM: SEARCH / RETRIEVE MODE ---\n";
 
         while (true)
         {
+            bool found{false};
+
             std::cout << "\nEnter item name to search (Q to quit): ";
             std::cin >> itemName;
 
@@ -255,8 +257,8 @@ void SportsStoreProg::searchEquip()
                 {
                     found = true;
                     std::cout << "\nItem found!";
-                    std::cout << "\n\nName            : " << eqpmnts[i]->getName() << "\n";
-                    std::cout << "Category            :" << eqpmnts[i]->getCateg() << "\n";
+                    std::cout << "\n\nName                : " << eqpmnts[i]->getName() << "\n";
+                    std::cout << "Category            : " << eqpmnts[i]->getCateg() << "\n";
                     std::cout << "Good Quantity       : " << eqpmnts[i]->getGoodQ() << "\n";
                     std::cout << "Broken Quantity     : " << eqpmnts[i]->getBrokenQ() << "\n";
                     std::cout << "Lost Quantity       : " << eqpmnts[i]->getLostQ() << "\n";
@@ -294,17 +296,19 @@ void SportsStoreProg::printSummary()
         goodValue += eqpmnts[i]->getGoodQ() * eqpmnts[i]->getUnitValRM();
         brokenValue += eqpmnts[i]->getBrokenQ() * eqpmnts[i]->getUnitValRM();
         lostValue += eqpmnts[i]->getLostQ() * eqpmnts[i]->getUnitValRM();
-
-        avgValue = totalValue /  totalQty;
     }
+    avgValue = totalValue /  totalQty;
 
     std::cout << "\n--- SPORTS STOREROOM: REPORT ---\n" << std::endl;
     std::cout << "Item Records              : " << eqpmnts.size() << std::endl;
-    
+
     std::cout << "\nTotal Quantity            : " << totalQty << std::endl;
     std::cout << "Total Good                : " << totalGood << std::endl;
     std::cout << "Total Broken              : " << totalBroken << std::endl;
     std::cout << "Total Lost                : " << totalLost << std::endl;
+
+    std::cout << "\nAverage Equipment Value   : RM" << std::fixed << std::setprecision(2) 
+            << avgValue << std::endl;
 
     std::cout << "\nTotal Value               : RM" << std::fixed << std::setprecision(2) 
                 << totalValue << std::endl;
@@ -314,8 +318,5 @@ void SportsStoreProg::printSummary()
                 << brokenValue << std::endl;
     std::cout << "Total Lost Value          : RM" << std::fixed << std::setprecision(2) 
                 << lostValue << std::endl;
-
-    std::cout << "\nAverage Equipment Value   : RM" << std::fixed << std::setprecision(2) 
-            << avgValue << std::endl;
     std::cout << "\n-----------------------------\n\n";
 }

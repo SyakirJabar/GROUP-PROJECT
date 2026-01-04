@@ -1,8 +1,5 @@
 //main.cpp
 
-#include "SportsEquip/Ball.h"
-#include "SportsEquip/Racket.h"
-#include "SportsEquip/Throwable.h"
 #include "SportsStoreProg/SportsStoreProg.h"
 
 int main()
