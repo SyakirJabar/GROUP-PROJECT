@@ -76,15 +76,15 @@ SportsStoreProg::SportsStoreProg()
     if (outFile.is_open()) {
         for (size_t i = 0; i < eqpmnts.size(); i++)
         {
-        // Save raw data separated by spaces
-        outFile << eqpmnts[i]->getType() << " "
-                << eqpmnts[i]->getName() << " "
-                << eqpmnts[i]->getCateg() << " "
-                << eqpmnts[i]->getGoodQ() << " "
-                << eqpmnts[i]->getBrokenQ() << " "
-                << eqpmnts[i]->getLostQ() << " "
-                << std::fixed << std::setprecision(2) 
-                << eqpmnts[i]->getUnitValRM() << std::endl;
+            // Save raw data separated by spaces
+            outFile << eqpmnts[i]->getType() << " "
+                    << eqpmnts[i]->getName() << " "
+                    << eqpmnts[i]->getCateg() << " "
+                    << eqpmnts[i]->getGoodQ() << " "
+                    << eqpmnts[i]->getBrokenQ() << " "
+                    << eqpmnts[i]->getLostQ() << " "
+                    << std::fixed << std::setprecision(2) 
+                    << eqpmnts[i]->getUnitValRM() << std::endl;
         }
     }
     else 
