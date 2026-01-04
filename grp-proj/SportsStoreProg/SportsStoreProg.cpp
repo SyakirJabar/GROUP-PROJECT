@@ -130,11 +130,11 @@ void SportsStoreProg::insEquip() {
                     break;
 
         case 'R':   sportsEquip = std::make_unique<Racket> 
-                            (Racket(itemName, itemCateg, brokenQty, lostQty, unitValue));
+                            (Racket(itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue));
                     break;
 
         case 'P':   sportsEquip = std::make_unique<Projectile> 
-                            (Projectile(itemName, itemCateg, brokenQty, lostQty, unitValue));
+                            (Projectile(itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue));
         }
 
         eqpmnts.push_back(std::move(sportsEquip));
