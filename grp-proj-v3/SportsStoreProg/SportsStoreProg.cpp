@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <fstream>
 #include <string>
+#include <ctime>
 
 typedef std::string str;
 
@@ -12,6 +13,17 @@ typedef std::string str;
 //constructor
 SportsStoreProg::SportsStoreProg()
 {
+    std::ofstream tStampRecord("SysAccessRecords.txt", std::ios::app);
+
+    // Get the timestamp for the current date and time
+    time_t timestamp;
+    time(&timestamp);
+
+    // Display the date and time represented by the timestamp
+    tStampRecord << ctime(&timestamp);
+
+    tStampRecord.close();
+
     char type;
     str name, categ;
     int goodQ, brokenQ, lostQ;
@@ -239,38 +251,38 @@ void SportsStoreProg::searchEquip()
 {
     str itemName;
     
-        std::cout << "\n--- SPORTS STOREROOM: SEARCH / RETRIEVE MODE ---\n";
+    std::cout << "\n--- SPORTS STOREROOM: SEARCH / RETRIEVE MODE ---\n";
 
-        while (true)
+    while (true)
+    {
+        bool found{false};
+
+        std::cout << "\nEnter item name to search (Q to quit): ";
+        std::cin >> itemName;
+
+        if (itemName == "Q" || itemName == "q") break;
+
+        //go through
+        for (size_t i = 0; i < eqpmnts.size(); i++)
         {
-            bool found{false};
-
-            std::cout << "\nEnter item name to search (Q to quit): ";
-            std::cin >> itemName;
-
-            if (itemName == "Q" || itemName == "q") break;
-
-            //go through
-            for (size_t i = 0; i < eqpmnts.size(); i++)
+            if (itemName == eqpmnts[i]->getName()) 
             {
-                if (itemName == eqpmnts[i]->getName()) 
-                {
-                    found = true;
-                    std::cout << "\nItem found!";
-                    std::cout << "\n\nName                : " << eqpmnts[i]->getName() << "\n";
-                    std::cout << "Category            : " << eqpmnts[i]->getCateg() << "\n";
-                    std::cout << "Good Quantity       : " << eqpmnts[i]->getGoodQ() << "\n";
-                    std::cout << "Broken Quantity     : " << eqpmnts[i]->getBrokenQ() << "\n";
-                    std::cout << "Lost Quantity       : " << eqpmnts[i]->getLostQ() << "\n";
-                    std::cout << "Value per unit (RM) : " << eqpmnts[i]->getUnitValRM() << "\n";
-                    break;
-                }
-            }
-            if (!found) {
-                std::cout << "\nItem not found..." << std::endl;
+                found = true;
+                std::cout << "\nItem found!";
+                std::cout << "\n\nName                : " << eqpmnts[i]->getName() << "\n";
+                std::cout << "Category            : " << eqpmnts[i]->getCateg() << "\n";
+                std::cout << "Good Quantity       : " << eqpmnts[i]->getGoodQ() << "\n";
+                std::cout << "Broken Quantity     : " << eqpmnts[i]->getBrokenQ() << "\n";
+                std::cout << "Lost Quantity       : " << eqpmnts[i]->getLostQ() << "\n";
+                std::cout << "Value per unit (RM) : " << eqpmnts[i]->getUnitValRM() << "\n";
+                break;
             }
         }
-        std::cout << "\n-----------------------------\n\n";
+        if (!found) {
+            std::cout << "\nItem not found..." << std::endl;
+        }
+    }
+    std::cout << "\n-----------------------------\n\n";
 }
 
 
