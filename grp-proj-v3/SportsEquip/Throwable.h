@@ -7,13 +7,8 @@
 class Throwable : public SportsEquip
 {
 private:
+private:
     char type{'T'};
-    str name;
-    str categ;      //category of sports equipment
-    int goodQ;      //quantity of ball not lost or broken
-    int brokenQ;
-    int lostQ;
-    double unitValRM;
 
 public:
     //constructors

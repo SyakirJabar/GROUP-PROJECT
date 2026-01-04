@@ -8,6 +8,14 @@ typedef std::string str;
 
 class SportsEquip
 {
+protected:
+    char type;
+    str name;
+    str categ;      //category of sports equipment
+    int goodQ;      //quantity of equipment not lost or broken
+    int brokenQ;
+    int lostQ;
+    double unitValRM;    
 public:
     ~SportsEquip();     //destructor
 
