@@ -121,3 +121,32 @@ void SportsStoreProg::searchEquip()
         std::cout << "\n>> Item not found." << std::endl;
     }
 }
+
+void SportsStoreProg::printSummary()
+{
+    if (count == 0) {
+        std::cout << "\nNo records to summarize!" << std::endl;
+        return;
+    }
+
+    int totalQty = 0, totalBroken = 0, totalLost = 0;
+    double totalValue = 0, brokenValue = 0, lostValue = 0;
+
+    for (int i = 0; i < count; i++) {
+        totalQty += items[i].quantity;
+        totalBroken += items[i].broken;
+        totalLost += items[i].lost;
+        totalValue += items[i].quantity * items[i].unitPrice;
+        brokenValue += items[i].broken * items[i].unitPrice;
+        lostValue += items[i].lost * items[i].unitPrice;
+    }
+
+    std::cout << "\n===== SUMMARY / REPORT =====" << std::endl;
+    std::cout << "Total Item Records: " << count << std::endl;
+    std::cout << "Total Quantity: " << totalQty << std::endl;
+    std::cout << "Total Broken: " << totalBroken << std::endl;
+    std::cout << "Total Lost: " << totalLost << std::endl;
+    std::cout << "Total Value: RM" << std::fixed << std::setprecision(2) << totalValue << std::endl;
+    std::cout << "Total Broken Value: RM" << std::fixed << std::setprecision(2) << brokenValue << std::endl;
+    std::cout << "Total Lost Value: RM" << std::fixed << std::setprecision(2) << lostValue << std::endl;
+}
