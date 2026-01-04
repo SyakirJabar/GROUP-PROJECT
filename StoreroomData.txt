@@ -1,3 +1,4 @@
 B BallerSoc soccer 5 0 1 49.00
 B SoccerBall soccer 5 0 1 49.00
 R TennisRacket tennis 9 1 0 51.00
+T ShoputSteelBall shotput 5 0 0 60.00
