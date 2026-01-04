@@ -111,7 +111,7 @@ void SportsStoreProg::insEquip() {
         std::cout << "Enter Item Category: ";
         std::cin >> itemCateg;
 
-        std::cout << "Enter Total Quantity: ";
+        std::cout << "Enter Good Quantity: ";
         std::cin >> goodQty;
 
         std::cout << "Enter Broken Quantity: ";
