@@ -222,7 +222,6 @@ void SportsStoreProg::dispAllEquip()
 void SportsStoreProg::searchEquip()
 {
     str searchItem, itemName;
-    double unitValue;
     bool found{false};
 
     std::cout << "\n--- SEARCH / RETRIEVE MODE ---" << std::endl;
