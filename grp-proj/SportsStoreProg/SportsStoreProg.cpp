@@ -51,7 +51,6 @@ SportsStoreProg::SportsStoreProg()
     // }
 
     char usrIn{};
-    bool exit{};
 
     bool loop{true};
     while (loop)
@@ -87,7 +86,7 @@ SportsStoreProg::SportsStoreProg()
     std::ofstream outFile("../StoreroomData.txt", std::ios::out);
 
     if (outFile.is_open()) {
-        for (int i = 0; i < eqpmnts.size(); i++)
+        for (size_t i = 0; i < eqpmnts.size(); i++)
         {
         // Save raw data separated by spaces
         outFile << eqpmnts[i]->getType() << " "
@@ -204,7 +203,7 @@ void SportsStoreProg::dispAllEquip()
     std::cout << std::string(83, '-') << "\n";
     
     // Data rows
-    for (int i = 0; i < eqpmnts.size(); i++)
+    for (size_t i = 0; i < eqpmnts.size(); i++)
     {
         std::cout << std::left
                   << std::setw(6)  << eqpmnts[i]->getType()
@@ -223,7 +222,6 @@ void SportsStoreProg::dispAllEquip()
 void SportsStoreProg::searchEquip()
 {
     str searchItem, itemName;
-    int quantity, brokenQty, lostQty;
     double unitValue;
     bool found{false};
 
@@ -232,8 +230,8 @@ void SportsStoreProg::searchEquip()
     std::cin.ignore();
     std::getline(std::cin, itemName);
 
-    int i = 0;
-    for (; i < eqpmnts.size(); i++)
+    
+    for (size_t i = 0; i < eqpmnts.size(); i++)
     {
         if (itemName == eqpmnts[i]->getName()) 
         {
@@ -264,7 +262,7 @@ void SportsStoreProg::printSummary()
     int totalQty = 0, totalBroken = 0, totalLost = 0;
     double totalValue = 0, brokenValue = 0, lostValue = 0;
 
-    for (int i = 0; i < eqpmnts.size(); i++) {
+    for (size_t i = 0; i < eqpmnts.size(); i++) {
         totalQty += eqpmnts[i]->getGoodQ() + eqpmnts[i]->getBrokenQ() + eqpmnts[i]->getLostQ();
         totalBroken += eqpmnts[i]->getBrokenQ();
         totalLost += eqpmnts[i]->getLostQ();
