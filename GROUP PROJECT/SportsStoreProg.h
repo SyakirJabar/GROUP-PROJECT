@@ -1,4 +1,5 @@
 //SportsStoreProg.h
+#pragma once
 
 class SportsStoreProg
 {
