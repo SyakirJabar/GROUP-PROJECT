@@ -90,11 +90,11 @@ void SportsStoreProg::insEquip() {
         std::cout << "Enter type of equipments\n";
         std::cout << "[B]all\n";
         std::cout << "[R]acket\n";
-        std::cout << "[P]rojectile\n";
+        std::cout << "[T]hrowable\n";
         std::cout << "X to quit\n";
         std::cin >> equipType;
 
-        if (equipType != 'B' && equipType != 'R' && equipType != 'P' && equipType != 'X')
+        if (equipType != 'B' && equipType != 'R' && equipType != 'T' && equipType != 'X')
         {
             std::cout << "Invalid input. Try again.\n";
             continue;
@@ -133,8 +133,8 @@ void SportsStoreProg::insEquip() {
                             (Racket(itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue));
                     break;
 
-        case 'P':   sportsEquip = std::make_unique<Projectile> 
-                            (Projectile(itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue));
+        case 'P':   sportsEquip = std::make_unique<Throwable> 
+                            (Throwable(itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue));
         }
 
         eqpmnts.push_back(std::move(sportsEquip));

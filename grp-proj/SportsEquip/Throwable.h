@@ -4,7 +4,7 @@
 
 #include "SportsEquip.h"
 
-class Projectile : public SportsEquip
+class Throwable : public SportsEquip
 {
 private:
     str name;
@@ -14,12 +14,12 @@ private:
     int lostQ;
     double unitValRM;
 
-public:\
+public:
     //constructors
-    Projectile(const str&, const str&, const int&, const int&, const int&, const double&);
-    Projectile();     //default
+    Throwable(const str&, const str&, const int&, const int&, const int&, const double&);
+    Throwable();     //default
 
-    ~Projectile();    //destructor
+    ~Throwable();    //destructor
 
     //getters
     str getName() const override;

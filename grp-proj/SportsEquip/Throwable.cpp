@@ -1,54 +1,54 @@
-//Projectile.cpp
+//Throwable.cpp
 //derived from SportsEquip
 
-#include "Projectile.h"
+#include "Throwable.h"
 #include <iostream>
 
 /*  CONSTRUCTORS & DESTRUCTORS  */
-Projectile::Projectile
+Throwable::Throwable
     (const str& n, const str& c, const int& gq, const int& bq, const int& lq, const double& uv)
     : name{n}, categ{c}, goodQ{gq}, brokenQ{bq}, lostQ{lq}, unitValRM{uv}
 {}
 
 //default constructor
-Projectile::Projectile()
+Throwable::Throwable()
 {
     std::cerr << "Object Racket must NOT be empty!";
     exit(1);
 }
 
 //destructor
-Projectile::~Projectile()
+Throwable::~Throwable()
 {}
 /*******************************/
 
 /*  GETTERS  */
-str Projectile::getName() const
+str Throwable::getName() const
 {
     return name;
 }
 
-str Projectile::getCateg() const
+str Throwable::getCateg() const
 {
     return categ;
 }
 
-int Projectile::getGoodQ() const
+int Throwable::getGoodQ() const
 {
     return goodQ;
 }
 
-int Projectile::getBrokenQ() const
+int Throwable::getBrokenQ() const
 {
     return brokenQ;
 }
 
-int Projectile::getLostQ() const
+int Throwable::getLostQ() const
 {
     return lostQ;
 }
 
-double Projectile::getUnitValRM() const
+double Throwable::getUnitValRM() const
 {
     return unitValRM;
 }
