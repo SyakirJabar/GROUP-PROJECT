@@ -2,12 +2,12 @@ CXX = g++
 CXXFLAGS = -std=c++17 -Wall
 
 # List all your .cpp files here
-SOURCES = grp-proj/main.cpp \
-          grp-proj/SportsStoreProg/SportsStoreProg.cpp \
-          grp-proj/SportsEquip/Ball.cpp \
-          grp-proj/SportsEquip/Racket.cpp \
-          grp-proj/SportsEquip/Throwable.cpp \
-          grp-proj/SportsEquip/SportsEquip.cpp
+SOURCES = grp-proj-v2/main.cpp \
+          grp-proj-v2/SportsStoreProg/SportsStoreProg.cpp \
+          grp-proj-v2/SportsEquip/Ball.cpp \
+          grp-proj-v2/SportsEquip/Racket.cpp \
+          grp-proj-v2/SportsEquip/Throwable.cpp \
+          grp-proj-v2/SportsEquip/SportsEquip.cpp
 
 # Output executable name
 TARGET = storeroom

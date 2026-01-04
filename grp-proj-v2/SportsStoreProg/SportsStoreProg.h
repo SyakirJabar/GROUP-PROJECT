@@ -11,7 +11,8 @@
 struct SportsStoreProg
 {
 private:
-    //vector storing pointers to objects of classes derived from SportsEquip (base) class
+    //vector storing (unique) pointers to objects of classes derived 
+    //from SportsEquip (base) class
     std::vector<std::unique_ptr<SportsEquip>> eqpmnts;  //sports equipments
 
 public:

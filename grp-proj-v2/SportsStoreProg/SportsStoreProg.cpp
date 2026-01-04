@@ -20,6 +20,7 @@ SportsStoreProg::SportsStoreProg()
 
     std::ifstream inFile("StoreroomData.txt");
 
+    //read every line in external file
     while (inFile >> type >> name >> categ >> goodQ >> brokenQ >> lostQ >> unitValRM)
     {
         switch (type)
@@ -34,21 +35,9 @@ SportsStoreProg::SportsStoreProg()
                     break;
         }
 
-        eqpmnts.push_back(std::move(sportsEquip));
+        eqpmnts.push_back(std::move(sportsEquip));  //transfer pointer ownership from sportsEquip
     }
-    inFile.close();
-
-    //test only
-    // for (const auto& equip : eqpmnts)
-    // {
-    //     std::cout << equip->getType() << " | "
-    //             << equip->getName() << " | "
-    //             << equip->getCateg() << " | "
-    //             << equip->getGoodQ() << " | "
-    //             << equip->getBrokenQ() << " | "
-    //             << equip->getLostQ() << " | "
-    //             << std::fixed << std::setprecision(2) << equip->getUnitValRM() << "\n";
-    // }
+    inFile.close();  //close file (good practice)
 
     char usrIn{};
 
@@ -57,17 +46,16 @@ SportsStoreProg::SportsStoreProg()
     {
         std::cout << "MAIN MENU\n";
         std::cout << "=========\n";
-        std::cout << "\n1. Insert Record\n";
+        std::cout << "1. Insert Record\n";
         std::cout << "2. Display All Records\n";
         std::cout << "3. Search Records\n";
         std::cout << "4. Print Report\n";
-        std::cout << "q to exit\n";
+        std::cout << "Q to exit\n";
         std::cout << "-----------------------\n";
         std::cout << "User input: ";
-        
         std::cin >> usrIn;
 
-        switch (usrIn)
+        switch (std::tolower(usrIn))
         {
         case '1': insEquip();
                   break;
@@ -111,6 +99,7 @@ SportsStoreProg::SportsStoreProg()
 SportsStoreProg::~SportsStoreProg()
 {}
 
+//insert sports equipments into 
 void SportsStoreProg::insEquip() {
     str itemName, itemCateg;
     int goodQty, brokenQty, lostQty;
@@ -124,43 +113,47 @@ void SportsStoreProg::insEquip() {
         char equipType{};
 
         // Prompt user to enter type of sports equipment
-        std::cout << "\nEnter type of equipments\n";
+        std::cout << "\nEnter type of sports equipment\n";
         std::cout << "[B]all\n";
         std::cout << "[R]acket\n";
         std::cout << "[T]hrowable\n";
-        std::cout << "X to quit\n";
+        std::cout << "Q to quit\n";
+        std::cout << "------------\n";
+        std::cout << "Equipment type: ";
         std::cin >> equipType;
 
-        if (equipType != 'B' && equipType != 'R' && equipType != 'T' && equipType != 'X')
+
+        if (std::tolower(equipType) != 'b' && std::tolower(equipType) != 'r' 
+            && std::tolower(equipType) != 't' && std::tolower(equipType) != 'q')
         {
             std::cout << "Invalid input. Try again.\n";
             continue;
         }
 
-        if (equipType == 'X')   break;
+        if (std::tolower(equipType) == 'q')   break;
 
         // Using loop condition that reads itemName from cin to continue looping
         // and returns false when Ctrl+Z is detected
-        std::cout << "\nEnter Item Name: ";
-        std::cin.ignore();  // Clear leftover newline first
-        std::getline(std::cin, itemName);
+        std::cout << "\nName (NO spaces): ";
+        std::cin >>itemName;
 
         // Collect the rest of the data for this item
-        std::cout << "Enter Item Category: ";
-        std::getline(std::cin, itemCateg);
+        std::cout << "Category (NO spaces): ";
+        std::cin >> itemCateg;
 
-        std::cout << "Enter Good Quantity: ";
+        std::cout << "Good (Not Lost/Broken) Quantity: ";
         std::cin >> goodQty;
 
-        std::cout << "Enter Broken Quantity: ";
+        std::cout << "Broken Quantity: ";
         std::cin >> brokenQty;
 
-        std::cout << "Enter Lost Quantity: ";
+        std::cout << "Lost Quantity: ";
         std::cin >> lostQty;
 
-        std::cout << "Enter Estimate Value per Unit (RM): ";
+        std::cout << "Value per Unit (RM): ";
         std::cin >> unitValue;
 
+        //instantiate SportsEquip derivation depending on equipment type
         switch(equipType)
         {
         case 'B':   sportsEquip = std::make_unique<Ball> 
@@ -176,10 +169,12 @@ void SportsStoreProg::insEquip() {
                     break;
         }
 
+        //transfer ownership sportsEquip from pointer sportsEquip
         eqpmnts.push_back(std::move(sportsEquip));
     }
 }
 
+//display all sports equipments
 void SportsStoreProg::dispAllEquip()
 {
     if (eqpmnts.empty()) {
@@ -189,7 +184,7 @@ void SportsStoreProg::dispAllEquip()
 
     std::cout << "\n--- ALL EQUIPMENT RECORDS ---\n\n";
     
-    // Header row
+    //header row
     std::cout << std::left
               << std::setw(6)  << "Type"
               << std::setw(20) << "Name"
@@ -199,10 +194,10 @@ void SportsStoreProg::dispAllEquip()
               << std::setw(10) << "Lost"
               << std::setw(12) << "Unit (RM)" << "\n";
     
-    // Separator line
+    //separator line
     std::cout << std::string(83, '-') << "\n";
     
-    // Data rows
+    //data rows
     for (size_t i = 0; i < eqpmnts.size(); i++)
     {
         std::cout << std::left
@@ -217,39 +212,49 @@ void SportsStoreProg::dispAllEquip()
     
     std::cout << std::string(83, '-') << "\n";
     std::cout << "Total records: " << eqpmnts.size() << "\n";
+
+    std::cout << "\n-----------------------------\n\n";
 }
 
+//search a sports equipment by equipment name
 void SportsStoreProg::searchEquip()
 {
-    str searchItem, itemName;
+    str itemName;
     bool found{false};
 
-    std::cout << "\n--- SEARCH / RETRIEVE MODE ---" << std::endl;
-    std::cout << "Enter item name to search: ";
-    std::cin.ignore();
-    std::getline(std::cin, itemName);
-
     
-    for (size_t i = 0; i < eqpmnts.size(); i++)
-    {
-        if (itemName == eqpmnts[i]->getName()) 
-        {
-            found = true;
-            std::cout << ">> Item found!";
-            std::cout << "\nName: " << eqpmnts[i]->getName() << "\n";
-            std::cout << "Category: " << eqpmnts[i]->getCateg() << "\n";
-            std::cout << "Good Quantity: " << eqpmnts[i]->getGoodQ() << "\n";
-            std::cout << "Broken Quantity: " << eqpmnts[i]->getBrokenQ() << "\n";
-            std::cout << "Lost Quantity: " << eqpmnts[i]->getLostQ() << "\n";
-            std::cout << "Value per unit (RM): " << eqpmnts[i]->getUnitValRM() << "\n";
-            break;
-        }
-    }
+        std::cout << "\n--- SPORTS STOREROOM: SEARCH / RETRIEVE MODE ---\n";
 
-    if (!found) {
-        std::cout << "\n>> Item not found." << std::endl;
-    }
+        while (true)
+        {
+            std::cout << "\nEnter item name to search (Q to quit): ";
+            std::cin >> itemName;
+
+            if (itemName == "Q" || itemName == "q") break;
+
+            //go through
+            for (size_t i = 0; i < eqpmnts.size(); i++)
+            {
+                if (itemName == eqpmnts[i]->getName()) 
+                {
+                    found = true;
+                    std::cout << "\nItem found!";
+                    std::cout << "\n\nName            : " << eqpmnts[i]->getName() << "\n";
+                    std::cout << "Category            :" << eqpmnts[i]->getCateg() << "\n";
+                    std::cout << "Good Quantity       : " << eqpmnts[i]->getGoodQ() << "\n";
+                    std::cout << "Broken Quantity     : " << eqpmnts[i]->getBrokenQ() << "\n";
+                    std::cout << "Lost Quantity       : " << eqpmnts[i]->getLostQ() << "\n";
+                    std::cout << "Value per unit (RM) : " << eqpmnts[i]->getUnitValRM() << "\n";
+                    break;
+                }
+            }
+            if (!found) {
+                std::cout << "\nItem not found..." << std::endl;
+            }
+        }
+        std::cout << "\n-----------------------------\n\n";
 }
+
 
 void SportsStoreProg::printSummary()
 {
@@ -265,17 +270,22 @@ void SportsStoreProg::printSummary()
         totalQty += eqpmnts[i]->getGoodQ() + eqpmnts[i]->getBrokenQ() + eqpmnts[i]->getLostQ();
         totalBroken += eqpmnts[i]->getBrokenQ();
         totalLost += eqpmnts[i]->getLostQ();
-        totalValue += (eqpmnts[i]->getGoodQ() + eqpmnts[i]->getBrokenQ() + eqpmnts[i]->getLostQ()) * eqpmnts[i]->getUnitValRM();
+        totalValue += (eqpmnts[i]->getGoodQ() + eqpmnts[i]->getBrokenQ() 
+                        + eqpmnts[i]->getLostQ()) * eqpmnts[i]->getUnitValRM();
         brokenValue += eqpmnts[i]->getBrokenQ() * eqpmnts[i]->getUnitValRM();
         lostValue += eqpmnts[i]->getLostQ() * eqpmnts[i]->getUnitValRM();
     }
 
-    std::cout << "\n===== SUMMARY / REPORT =====" << std::endl;
-    std::cout << "Total Item Records: " << eqpmnts.size() << std::endl;
-    std::cout << "Total Quantity: " << totalQty << std::endl;
-    std::cout << "Total Broken: " << totalBroken << std::endl;
-    std::cout << "Total Lost: " << totalLost << std::endl;
-    std::cout << "Total Value: RM" << std::fixed << std::setprecision(2) << totalValue << std::endl;
-    std::cout << "Total Broken Value: RM" << std::fixed << std::setprecision(2) << brokenValue << std::endl;
-    std::cout << "Total Lost Value: RM" << std::fixed << std::setprecision(2) << lostValue << std::endl;
+    std::cout << "\n--- SPORTS STOREROOM: REPORT ---\n" << std::endl;
+    std::cout << "Total Item Records : " << eqpmnts.size() << std::endl;
+    std::cout << "Total Quantity     : " << totalQty << std::endl;
+    std::cout << "Total Broken       : " << totalBroken << std::endl;
+    std::cout << "Total Lost         : " << totalLost << std::endl;
+    std::cout << "Total Value        : RM" << std::fixed << std::setprecision(2) 
+                << totalValue << std::endl;
+    std::cout << "Total Broken Value : RM" << std::fixed << std::setprecision(2) 
+                << brokenValue << std::endl;
+    std::cout << "Total Lost Value   : RM" << std::fixed << std::setprecision(2) 
+                << lostValue << std::endl;
+    std::cout << "\n-----------------------------\n\n";
 }
