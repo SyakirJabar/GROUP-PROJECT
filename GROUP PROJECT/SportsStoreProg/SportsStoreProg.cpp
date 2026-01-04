@@ -45,6 +45,26 @@ SportsStoreProg::SportsStoreProg()
                   break;
         default : std::cout << "Invalid input. Try again...\n\n";
         }
+
+        // Open file in Write Mode
+        std::ofstream outFile("../StoreroomData.txt", std::ios::out);
+
+        if (outFile.is_open()) {
+            for (int i = 0; i < eqpmnts.size(); i++)
+            {
+            // Save raw data separated by spaces
+            outFile << eqpmnts[i]->getName() << " "
+                << eqpmnts[i]->getCateg() << " "
+                << eqpmnts[i]->getGoodQ() << " "
+                << eqpmnts[i]->getBrokenQ() << " "
+                << eqpmnts[i]->getLostQ() << " "
+                << std::fixed << std::setprecision(2) << eqpmnts[i]->getUnitValRM() << std::endl;
+            }
+            outFile.close();
+        }
+        else {
+            std::cout << ">> Error: Unable to access StoreroomData.txt." << std::endl;
+        }
     }
 }
 
@@ -116,23 +136,23 @@ void SportsStoreProg::insEquip() {
 
         eqpmnts.push_back(std::move(sportsEquip));
 
-        // Open file in Append Mode
-        std::ofstream outFile("StoreroomData.txt", std::ios::app);
+        // // Open file in Append Mode
+        // std::ofstream outFile("StoreroomData.txt", std::ios::app);
 
-        if (outFile.is_open()) {
-            // Save raw data separated by spaces
-            outFile << itemName << " "
-                << itemCateg << " "
-                << brokenQty << " "
-                << lostQty << " "
-                << std::fixed << std::setprecision(2) << unitValue << std::endl;
+        // if (outFile.is_open()) {
+        //     // Save raw data separated by spaces
+        //     outFile << itemName << " "
+        //         << itemCateg << " "
+        //         << brokenQty << " "
+        //         << lostQty << " "
+        //         << std::fixed << std::setprecision(2) << unitValue << std::endl;
 
-            outFile.close();
-            std::cout << ">> '" << itemName << "' saved successfully." << std::endl;
-        }
-        else {
-            std::cout << ">> Error: Unable to access StoreroomData.txt." << std::endl;
-        }
+        //     outFile.close();
+        //     std::cout << ">> '" << itemName << "' saved successfully." << std::endl;
+        // }
+        // else {
+        //     std::cout << ">> Error: Unable to access StoreroomData.txt." << std::endl;
+        // }
     }
     // Clearing to ensure selection menu works after ctrl+Z
     std::cin.clear();
