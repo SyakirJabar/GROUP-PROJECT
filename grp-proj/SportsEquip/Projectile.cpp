@@ -6,8 +6,8 @@
 
 /*  CONSTRUCTORS & DESTRUCTORS  */
 Projectile::Projectile
-    (const str& n, const str& c, const int& gq, const int& bq, const int& lq)
-    : name{n}, categ{c}, goodQ{gq}, brokenQ{bq}, lostQ{lq}
+    (const str& n, const str& c, const int& gq, const int& bq, const int& lq, const double& uv)
+    : name{n}, categ{c}, goodQ{gq}, brokenQ{bq}, lostQ{lq}, unitValRM{uv}
 {}
 
 //default constructor

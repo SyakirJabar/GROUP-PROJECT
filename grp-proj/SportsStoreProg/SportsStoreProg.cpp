@@ -126,7 +126,7 @@ void SportsStoreProg::insEquip() {
         switch(equipType)
         {
         case 'B':   sportsEquip = std::make_unique<Ball> 
-                            (Ball(itemName, itemCateg, brokenQty, lostQty, unitValue));
+                            (Ball(itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue));
                     break;
 
         case 'R':   sportsEquip = std::make_unique<Racket> 

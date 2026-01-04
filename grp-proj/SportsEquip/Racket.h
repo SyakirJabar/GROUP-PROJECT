@@ -16,7 +16,7 @@ private:
 
 public:\
     //constructors
-    Racket(const str&, const str&, const int&, const int&, const int&);
+    Racket(const str&, const str&, const int&, const int&, const int&, const double&);
     Racket();     //default
 
     ~Racket();    //destructor

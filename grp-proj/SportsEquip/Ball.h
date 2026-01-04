@@ -16,7 +16,7 @@ private:
 
 public:\
     //constructors
-    Ball(const str&, const str&, const int&, const int&, const int&);
+    Ball(const str&, const str&, const int&, const int&, const int&, const double&);
     Ball();     //default
 
     ~Ball();    //destructor

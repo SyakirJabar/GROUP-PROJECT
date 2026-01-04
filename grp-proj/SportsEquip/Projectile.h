@@ -16,7 +16,7 @@ private:
 
 public:\
     //constructors
-    Projectile(const str&, const str&, const int&, const int&, const int&);
+    Projectile(const str&, const str&, const int&, const int&, const int&, const double&);
     Projectile();     //default
 
     ~Projectile();    //destructor
