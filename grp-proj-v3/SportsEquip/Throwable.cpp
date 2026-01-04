@@ -13,7 +13,7 @@ Throwable::Throwable
 //default constructor
 Throwable::Throwable()
 {
-    std::cerr << "Object Racket must NOT be empty!";
+    std::cerr << "Object Throwable must NOT be empty!";
     exit(1);
 }
 

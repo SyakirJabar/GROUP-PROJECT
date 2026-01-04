@@ -11,7 +11,7 @@ private:
     char type{'T'};
     str name;
     str categ;      //category of sports equipment
-    int goodQ;      //quantity of ball not lost or broken
+    int goodQ;      //quantity of throwable not lost or broken
     int brokenQ;
     int lostQ;
     double unitValRM;

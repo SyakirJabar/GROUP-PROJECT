@@ -10,7 +10,7 @@ private:
     char type{'S'};
     str name;
     str categ;      //category of sports equipment
-    int goodQ;      //quantity of ball not lost or broken
+    int goodQ;      //quantity of stick not lost or broken
     int brokenQ;
     int lostQ;
     double unitValRM;
