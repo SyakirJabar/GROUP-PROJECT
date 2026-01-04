@@ -68,3 +68,56 @@ void insEquip() {
     std::cin.clear();
     std::cout << "\n>> Item entry complete. Returning to system..." << std::endl;
 }
+
+void SportsStoreProg::dispAllEquip()
+{
+
+}
+
+void SportsStoreProg::searchEquip()
+{
+    str searchItem, itemName;
+    int quantity, brokenQty, lostQty;
+    double unitValue;
+    bool found = false;
+
+    std::cout << "\n--- SEARCH / RETRIEVE MODE ---" << std::endl;
+    std::cout << "Enter item name to search: ";
+    std::cin >> searchItem;
+
+    std::ifstream inFile("StoreroomData.txt");
+
+    if (!inFile.is_open()) {
+        std::cout << ">> Error: Cannot open StoreroomData.txt." << std::endl;
+        return;
+    }
+
+    // Read data exactly in the same order as saved
+    while (inFile >> itemName >> quantity >> brokenQty >> lostQty >> unitValue) {
+
+        if (itemName == searchItem) {
+            double totalValue = quantity * unitValue;
+            double brokenValue = brokenQty * unitValue;
+            double lostValue = lostQty * unitValue;
+
+            std::cout << "\nItem Found!" << std::endl;
+            std::cout << "Item Name       : " << itemName << std::endl;
+            std::cout << "Total Quantity  : " << quantity << std::endl;
+            std::cout << "Broken Quantity : " << brokenQty << std::endl;
+            std::cout << "Lost Quantity   : " << lostQty << std::endl;
+            std::cout << "Unit Value (RM) : " << std::fixed << std::setprecision(2) << unitValue << std::endl;
+            std::cout << "Total Value     : RM" << totalValue << std::endl;
+            std::cout << "Broken Value    : RM" << brokenValue << std::endl;
+            std::cout << "Lost Value      : RM" << lostValue << std::endl;
+
+            found = true;
+            break;
+        }
+    }
+
+    inFile.close();
+
+    if (!found) {
+        std::cout << "\n>> Item not found." << std::endl;
+    }
+}
