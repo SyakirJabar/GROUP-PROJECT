@@ -1,12 +1,15 @@
 //SportsStoreProg.h
 #pragma once
 
-class SportsStoreProg
+struct SportsStoreProg
 {
 private:
     std::vector<std::unique_ptr<Equipment>> equipments;  //sports equipments stored
 
 public:
+    SportsStoreProg();  //constructor
+
+
     void insEquip();
     void displayAllEquip();
     void searchEquip();
