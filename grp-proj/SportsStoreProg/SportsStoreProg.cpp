@@ -54,10 +54,10 @@ SportsStoreProg::SportsStoreProg()
     bool exit{};
 
     bool loop{true};
-    std::cout << "Welcome\n";
-    std::cout << "-------";
     while (loop)
     {
+        std::cout << "MAIN MENU\n";
+        std::cout << "=========\n";
         std::cout << "\n1. Insert Record\n";
         std::cout << "2. Display All Records\n";
         std::cout << "3. Search Records\n";
