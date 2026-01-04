@@ -214,7 +214,7 @@ void SportsStoreProg::searchEquip()
 
 void SportsStoreProg::printSummary()
 {
-    if (count == 0) {
+    if (eqpmnts.size() == 0) {
         std::cout << "\nNo records to summarize!" << std::endl;
         return;
     }
@@ -222,17 +222,17 @@ void SportsStoreProg::printSummary()
     int totalQty = 0, totalBroken = 0, totalLost = 0;
     double totalValue = 0, brokenValue = 0, lostValue = 0;
 
-    for (int i = 0; i < count; i++) {
-        totalQty += items[i].quantity;
-        totalBroken += items[i].broken;
-        totalLost += items[i].lost;
-        totalValue += items[i].quantity * items[i].unitPrice;
-        brokenValue += items[i].broken * items[i].unitPrice;
-        lostValue += items[i].lost * items[i].unitPrice;
+    for (int i = 0; i < eqpmnts.size(); i++) {
+        totalQty += eqpmnts[i]->getGoodQ() + eqpmnts[i]->getBrokenQ() + eqpmnts[i]->getLostQ();
+        totalBroken += eqpmnts[i]->getBrokenQ();
+        totalLost += eqpmnts[i]->getLostQ();
+        totalValue += (eqpmnts[i]->getGoodQ() + eqpmnts[i]->getBrokenQ() + eqpmnts[i]->getLostQ()) * eqpmnts[i]->getUnitValRM();
+        brokenValue += eqpmnts[i]->getBrokenQ() * eqpmnts[i]->getUnitValRM();
+        lostValue += eqpmnts[i]->getLostQ() * eqpmnts[i]->getUnitValRM();
     }
 
     std::cout << "\n===== SUMMARY / REPORT =====" << std::endl;
-    std::cout << "Total Item Records: " << count << std::endl;
+    std::cout << "Total Item Records: " << eqpmnts.size() << std::endl;
     std::cout << "Total Quantity: " << totalQty << std::endl;
     std::cout << "Total Broken: " << totalBroken << std::endl;
     std::cout << "Total Lost: " << totalLost << std::endl;
