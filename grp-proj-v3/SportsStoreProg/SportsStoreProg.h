@@ -16,7 +16,7 @@ private:
     //vector storing (unique) pointers to objects of classes derived 
     //from SportsEquip (base) class
     std::vector<std::unique_ptr<SportsEquip>> eqpmnts;  //sports equipments
-    std::vector<std::vector<str>> eqpmnts2D;
+    std::vector<std::vector<str>> eqpmntsVal;
 
 public:
     SportsStoreProg();      //constructor
