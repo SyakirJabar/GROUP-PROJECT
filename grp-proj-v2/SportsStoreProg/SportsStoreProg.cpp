@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <fstream>
 #include <string>
+#include <cstring>
 
 typedef std::string str;
 
@@ -44,6 +45,7 @@ SportsStoreProg::SportsStoreProg()
     bool loop{true};
     while (loop)
     {
+
         std::cout << "MAIN MENU\n";
         std::cout << "=========\n";
         std::cout << "1. Insert Record\n";
@@ -73,18 +75,26 @@ SportsStoreProg::SportsStoreProg()
 
     std::ofstream outFile("StoreroomData.txt", std::ios::out);
 
+    char outStr[]{""};
+
     if (outFile.is_open()) {
         for (size_t i = 0; i < eqpmnts.size(); i++)
         {
-        // Save raw data separated by spaces
-        outFile << eqpmnts[i]->getType() << " "
-                << eqpmnts[i]->getName() << " "
-                << eqpmnts[i]->getCateg() << " "
-                << eqpmnts[i]->getGoodQ() << " "
-                << eqpmnts[i]->getBrokenQ() << " "
-                << eqpmnts[i]->getLostQ() << " "
-                << std::fixed << std::setprecision(2) 
-                << eqpmnts[i]->getUnitValRM() << std::endl;
+            strcat(outStr, eqpmnts[i]->getType() + " ");
+            strcat(outStr, (eqpmnts[i]->getName() + " ").c_str());
+            strcat(outStr, (eqpmnts[i]->getCateg() + " ").c_str());
+            strcat(outStr, eqpmnts[i]->getGoodQ() + " ");
+            strcat(outStr, eqpmnts[i]->getBrokenQ() + " ");
+            strcat(outStr, eqpmnts[i]->getLostQ() + " ");
+            // Save raw data separated by spaces
+            outFile << eqpmnts[i]->getType() << " "
+                    << eqpmnts[i]->getName() << " "
+                    << eqpmnts[i]->getCateg() << " "
+                    << eqpmnts[i]->getGoodQ() << " "
+                    << eqpmnts[i]->getBrokenQ() << " "
+                    << eqpmnts[i]->getLostQ() << " "
+                    << std::fixed << std::setprecision(2) 
+                    << eqpmnts[i]->getUnitValRM() << std::endl;
         }
     }
     else 
