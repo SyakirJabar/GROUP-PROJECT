@@ -272,13 +272,17 @@ void SportsStoreProg::searchEquip()
 
         if (itemName == "Q" || itemName == "q") break;
 
+        char itemFound[30]{""};
+        char itemNotFound[30]{""};
+
         //go through
         for (size_t i = 0; i < eqpmnts.size(); i++)
         {
             if (itemName == eqpmnts[i]->getName()) 
             {
                 found = true;
-                std::cout << "\nItem found!";
+                strcpy(itemFound, "\nItem found!");
+                std::cout << itemFound;
                 std::cout << "\n\nName                : " << eqpmnts[i]->getName() << "\n";
                 std::cout << "Category            : " << eqpmnts[i]->getCateg() << "\n";
                 std::cout << "Good Quantity       : " << eqpmnts[i]->getGoodQ() << "\n";
@@ -289,7 +293,8 @@ void SportsStoreProg::searchEquip()
             }
         }
         if (!found) {
-            std::cout << "\nItem not found..." << std::endl;
+            strcpy(itemNotFound, "\nItem not found...\n");
+            std::cout << itemNotFound;
         }
     }
     std::cout << "\n-----------------------------\n\n";
@@ -329,7 +334,7 @@ void SportsStoreProg::printSummary()
     std::cout << "Total Broken              : " << totalBroken << std::endl;
     std::cout << "Total Lost                : " << totalLost << std::endl;
 
-    
+
 
     std::cout << "\nAverage Equipment Value   : RM" << std::fixed << std::setprecision(2) 
             << avgValue << std::endl;
