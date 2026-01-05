@@ -66,15 +66,18 @@ SportsStoreProg::SportsStoreProg()
     bool loop{true};
     while (loop)
     {
-        std::cout << "MAIN MENU\n";
-        std::cout << "=========\n";
-        std::cout << "1. Insert Record\n";
-        std::cout << "2. Display All Records\n";
-        std::cout << "3. Search Records\n";
-        std::cout << "4. Print Report\n";
-        std::cout << "Q to exit\n";
-        std::cout << "-----------------------\n";
-        std::cout << "User input: ";
+        char mainMenu[150]{""};
+
+        strcat(mainMenu, "MAIN MENU\n");
+        strcat(mainMenu, "=========\n");
+        strcat(mainMenu, "1. Insert Record\n");
+        strcat(mainMenu, "2. Display All Records\n");
+        strcat(mainMenu, "3. Search Records\n");
+        strcat(mainMenu, "4. Print Report\n");
+        strcat(mainMenu, "Q to exit\n");
+        strcat(mainMenu, "-----------------------\n");
+        strcat(mainMenu, "User input: ");
+        std::cout << mainMenu;
         std::cin >> usrIn;
 
         switch (std::tolower(usrIn))
