@@ -98,8 +98,6 @@ SportsStoreProg::SportsStoreProg()
     if (outFile.is_open()) {
         for (size_t i = 0; i < eqpmnts.size(); i++)
         {
-            char outStr[100];
-
             // Save raw data separated by spaces
             outFile << eqpmnts[i]->getType() << " "
                     << eqpmnts[i]->getName() << " "
