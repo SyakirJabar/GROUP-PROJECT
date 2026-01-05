@@ -1,8 +1,3 @@
-B BallerSoc soccer 5 0 1 49.00
-B SoccerBall soccer 5 0 1 49.00
-R TennisRacket tennis 9 1 0 51.00
-T ShoputSteelBall shotput 5 0 0 60.00
-H HockeyHelmet hockey 7 2 1 70.00
-S HockeyStick hockey 17 5 2 51.90
-B HockeyPuck hockey 5 0 0 30.00
-B tennisBall tennis 20 0 5 30.00
+B soccerball soccer 7 0 1 50.00
+S hockeystick hockey 12 3 0 49.00
+B hockeypuck hockey 5 0 0 35.00
