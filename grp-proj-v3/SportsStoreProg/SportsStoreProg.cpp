@@ -137,6 +137,8 @@ void SportsStoreProg::insEquip() {
     while (true) {
         char equipType{};
 
+        char invalidIn[30]{""};
+
         // Prompt user to enter type of sports equipment
         std::cout << "\nEnter type of sports equipment\n";
         std::cout << "[B]all - object launched into the air by hitting another object, e.g. soccer ball, volley ball\n";
@@ -153,7 +155,8 @@ void SportsStoreProg::insEquip() {
             && std::tolower(equipType) != 't' && std::tolower(equipType) != 's'
             && std::tolower(equipType) != 'h' && std::tolower(equipType) != 'q')
         {
-            std::cout << "Invalid input. Try again.\n";
+            strcpy(invalidIn, "\nInvalid input. Try again.\n");
+            std::cout << invalidIn;
             continue;
         }
 
@@ -325,6 +328,8 @@ void SportsStoreProg::printSummary()
     std::cout << "Total Good                : " << totalGood << std::endl;
     std::cout << "Total Broken              : " << totalBroken << std::endl;
     std::cout << "Total Lost                : " << totalLost << std::endl;
+
+    
 
     std::cout << "\nAverage Equipment Value   : RM" << std::fixed << std::setprecision(2) 
             << avgValue << std::endl;
