@@ -1,5 +1,5 @@
 BITP1113 Programming Technique
-...............................
+
 GROUP PROJECT TITLE: SCHOOL'S SPORTS EQUIPMENT STOREROOM MANAGEMENT SYSTEM
 ---------------------------------------------------------------------------
 Lecturer: Dr. Nuridawati
