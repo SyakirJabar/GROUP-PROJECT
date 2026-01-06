@@ -18,5 +18,5 @@ The classes, struct, and main.cpp files are located in /GROUP-PROJECT/grp-proj-v
 1. Download the latest release from our Github repository.
 2. Extract the .zip file.
 3. From the main directory of our project, launch a terminal.
-4. Type make to compile and link the program.
-5. Enter ./storeroom to run the program.
+4. Type 'make' to compile and link the program.
+5. Enter './storeroom' to run the program.
