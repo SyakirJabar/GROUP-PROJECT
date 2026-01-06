@@ -373,6 +373,7 @@ void SportsStoreProg::printSummary()
     avgBrokenVal = (totalBroken > 0) ? brokenValue / totalBroken : 0.0;
     avgLostVal = (totalLost > 0)     ? lostValue / totalLost : 0.0;
 
+    //find equipment with highest total, good, broken, and lost values
     str hiTotalVal{eqpmntsVal[0][0]};
     double maxTotal = std::stod(eqpmntsVal[0][1]);
     for (size_t i = 1; i < eqpmntsVal.size(); i++) {
