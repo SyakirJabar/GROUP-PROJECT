@@ -135,6 +135,7 @@ SportsStoreProg::SportsStoreProg()
 SportsStoreProg::~SportsStoreProg()
 {}
 
+//Add / Insert Record
 //insert sports equipments into eqpmnts vector
 //[B152510105 Mohamad Adiputra Aiman bin Awang]
 void SportsStoreProg::insEquip() {
@@ -227,21 +228,24 @@ void SportsStoreProg::insEquip() {
                 break;
         }
 
-        //transfer ownership sportsEquip from pointer sportsEquip
+        //transfer ownership from pointer sportsEquip to an element in eqpmnts
         eqpmnts.push_back(std::move(sportsEquip));
     }
 }
 
-//display all sports equipments
+// Display All Records
+//display all sports equipment records
+//[B152510087 Muhammad Syakir bin Abd Jabar Tambi]
 void SportsStoreProg::dispAllEquip()
 {
+    //if vector is empty, let user know
     if (eqpmnts.empty()) {
         std::cout << "\nNo records to display!" << std::endl;
         return;
     }
 
-    std::cout << "\n--- ALL EQUIPMENT RECORDS ---\n\n";
-    
+    //display all equipment records in table format
+    std::cout << "\n--- ALL EQUIPMENT RECORDS ---\n\n";    
     //header row
     std::cout << std::left
               << std::setw(6)  << "#"
@@ -274,7 +278,9 @@ void SportsStoreProg::dispAllEquip()
     std::cout << "\n-----------------------------\n\n";
 }
 
+//Search / Retrieve
 //search a sports equipment by equipment name
+//[B152510069 Muhammad Haziq bin Md Halid]
 void SportsStoreProg::searchEquip()
 {
     str itemName;
@@ -288,14 +294,16 @@ void SportsStoreProg::searchEquip()
     {
         bool found{false};
 
+        //prompt user to enter equipment name 
         std::cout << "\nEnter item name to search (Q to quit): ";
         std::cin >> itemName;
 
         if (itemName == "Q" || itemName == "q") break;
 
-        //go through
+        //go through array to find equipment record
         for (size_t i = 0; i < eqpmnts.size(); i++)
         {
+            //let user know if equipment found, then print equipment record
             if (itemName == eqpmnts[i]->getName()) 
             {
                 found = true;
@@ -310,6 +318,7 @@ void SportsStoreProg::searchEquip()
                 break;
             }
         }
+        //let user know if equipment record doesn't exist
         if (!found) {
             strcpy(itemNotFound, "\nItem not found...\n");
             std::cout << itemNotFound;
@@ -318,9 +327,12 @@ void SportsStoreProg::searchEquip()
     std::cout << "\n-----------------------------\n\n";
 }
 
-
+//Summary / Report
+//calculate totals, averages, highest/lowest, and show overall summary
+//[B152510111 Muhammad Nabil Mohd Tam]
 void SportsStoreProg::printSummary()
 {
+    //let user know if no records
     if (eqpmnts.size() == 0) {
         std::cout << "\nNo records to summarize!" << std::endl;
         return;
@@ -383,6 +395,7 @@ void SportsStoreProg::printSummary()
         cmp = strcmp(eqpmntsVal[i][4].c_str(), eqpmntsVal[i+1][4].c_str());
         if (cmp < 0) hiLostVal = eqpmntsVal[i+1][0];
     }
+
 
     std::cout << "\n--- SPORTS STOREROOM: REPORT ---\n" << std::endl;
     std::cout << "Sports Equipment Records       : " << eqpmnts.size() << std::endl;
