@@ -304,7 +304,7 @@ void SportsStoreProg::searchEquip()
         for (size_t i = 0; i < eqpmnts.size(); i++)
         {
             //let user know if equipment found, then print equipment record
-            if (itemName == eqpmnts[i]->getName()) 
+            if (strcmp(itemName.c_str(), eqpmnts[i]->getName().c_str()) == 0)
             {
                 found = true;
                 strcpy(itemFound, "\nItem found!");
@@ -332,6 +332,8 @@ void SportsStoreProg::searchEquip()
 //[B152510111 Muhammad Nabil Mohd Tam]
 void SportsStoreProg::printSummary()
 {
+    eqpmntsVal.clear();     //clear 2D vector first
+
     //let user know if no records
     if (eqpmnts.size() == 0) {
         std::cout << "\nNo records to summarize!" << std::endl;
@@ -356,47 +358,60 @@ void SportsStoreProg::printSummary()
         lostValue += eqpmnts[i]->getLostQ() * eqpmnts[i]->getUnitValRM();
 
         eqpmntsVal.push_back(
-                                {eqpmnts[i]->getName(), 
-                                    std::to_string(totalValue),
-                                    std::to_string(goodValue), 
-                                    std::to_string(brokenValue), 
-                                    std::to_string(lostValue)});
+                                {eqpmnts[i]->getName(),
+                                    std::to_string((eqpmnts[i]->getGoodQ() + eqpmnts[i]->getBrokenQ() 
+                                                + eqpmnts[i]->getLostQ()) 
+                                                * eqpmnts[i]->getUnitValRM()),
+                                    std::to_string(eqpmnts[i]->getGoodQ() * eqpmnts[i]->getUnitValRM()),
+                                    std::to_string(eqpmnts[i]->getBrokenQ() 
+                                                    * eqpmnts[i]->getUnitValRM()), 
+                                    std::to_string(eqpmnts[i]->getLostQ() * eqpmnts[i]->getUnitValRM())}
+                            );
     }
-    avgValue = totalValue /  totalQty;
-    avgGoodVal = goodValue / totalGood;
-    avgBrokenVal = brokenValue / totalBroken;
-    avgLostVal = lostValue / totalLost;
+    avgValue = (totalQty > 0)        ? totalValue /  totalQty : 0.0;
+    avgGoodVal = (totalGood > 0)     ? goodValue / totalGood : 0.0;
+    avgBrokenVal = (totalBroken > 0) ? brokenValue / totalBroken : 0.0;
+    avgLostVal = (totalLost > 0)     ? lostValue / totalLost : 0.0;
 
-    int cmp{};                          //compare two total equipment (condition) value
-
-    str hiTotalVal{eqpmntsVal[0][0]};     //equipment with highest total value
-    for (size_t i = 0; i < eqpmntsVal.size()-1; i++)
-    {
-        cmp = strcmp(eqpmntsVal[i][2].c_str(), eqpmntsVal[i+1][2].c_str());
-        if (cmp < 0) hiTotalVal = eqpmntsVal[i+1][0];
-    }
-
-    str hiGoodVal{eqpmntsVal[0][0]};     //equipment with highest total good condition value
-    for (size_t i = 0; i < eqpmntsVal.size()-1; i++)
-    {
-        cmp = strcmp(eqpmntsVal[i][2].c_str(), eqpmntsVal[i+1][2].c_str());
-        if (cmp < 0) hiGoodVal = eqpmntsVal[i+1][0];
+    str hiTotalVal{eqpmntsVal[0][0]};
+    double maxTotal = std::stod(eqpmntsVal[0][1]);
+    for (size_t i = 1; i < eqpmntsVal.size(); i++) {
+        double val = std::stod(eqpmntsVal[i][1]);
+        if (val > maxTotal) {
+            maxTotal = val;
+            hiTotalVal = eqpmntsVal[i][0];
+        }
     }
 
-    str hiBrokenVal{eqpmntsVal[0][0]};     //equipment with highest total broken value
-    for (size_t i = 0; i < eqpmntsVal.size()-1; i++)
-    {
-        cmp = strcmp(eqpmntsVal[i][3].c_str(), eqpmntsVal[i+1][3].c_str());
-        if (cmp < 0) hiBrokenVal = eqpmntsVal[i+1][0];
+    str hiGoodVal{eqpmntsVal[0][0]};
+    double maxGood = std::stod(eqpmntsVal[0][2]);
+    for (size_t i = 1; i < eqpmntsVal.size(); i++) {
+        double val = std::stod(eqpmntsVal[i][2]);
+        if (val > maxGood) {
+            maxGood = val;
+            hiGoodVal = eqpmntsVal[i][0];
+        }
     }
 
-    str hiLostVal{eqpmntsVal[0][0]};     //equipment with highest total lost value
-    for (size_t i = 0; i < eqpmntsVal.size()-1; i++)
-    {
-        cmp = strcmp(eqpmntsVal[i][4].c_str(), eqpmntsVal[i+1][4].c_str());
-        if (cmp < 0) hiLostVal = eqpmntsVal[i+1][0];
+    str hiBrokenVal{eqpmntsVal[0][0]};
+    double maxBroken = std::stod(eqpmntsVal[0][3]);
+    for (size_t i = 1; i < eqpmntsVal.size(); i++) {
+        double val = std::stod(eqpmntsVal[i][3]);
+        if (val > maxBroken) {
+            maxBroken = val;
+            hiBrokenVal = eqpmntsVal[i][0];
+        }
     }
 
+    str hiLostVal{eqpmntsVal[0][0]};
+    double maxLost = std::stod(eqpmntsVal[0][4]);
+    for (size_t i = 1; i < eqpmntsVal.size(); i++) {
+        double val = std::stod(eqpmntsVal[i][4]);
+        if (val > maxLost) {
+            maxLost = val;
+            hiLostVal = eqpmntsVal[i][0];
+        }
+    }
 
     //print report
     std::cout << "\n--- SPORTS STOREROOM: REPORT ---\n" << std::endl;
@@ -417,10 +432,10 @@ void SportsStoreProg::printSummary()
                 << lostValue << std::endl;
 
     std::cout << "\nEquipments with the...\n";
-    std::cout << "Highest Total Value            : " << hiTotalVal << std::endl;
-    std::cout << "Highest Good Value             : " << hiGoodVal << std::endl;
-    std::cout << "Highest Broken Value           : " << hiBrokenVal << std::endl;
-    std::cout << "Highest Lost Value             : " << hiLostVal << std::endl;
+    std::cout << "Highest Total Value            : " << hiTotalVal << " (RM" << std::fixed << std::setprecision(2) << maxTotal << ")" << std::endl;
+    std::cout << "Highest Good Value             : " << hiGoodVal << " (RM" << std::fixed << std::setprecision(2) << maxGood << ")" << std::endl;
+    std::cout << "Highest Broken Value           : " << hiBrokenVal << " (RM" << std::fixed << std::setprecision(2) << maxBroken << ")" << std::endl;
+    std::cout << "Highest Lost Value             : " << hiLostVal << " (RM" << std::fixed << std::setprecision(2) << maxLost << ")" << std::endl;
 
     std::cout << "\nAverage Equipment Value        : RM" << std::fixed << std::setprecision(2) 
             << avgValue << std::endl;
