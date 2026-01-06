@@ -342,6 +342,7 @@ void SportsStoreProg::printSummary()
     double avgValue{0}, avgGoodVal{0}, avgBrokenVal{0}, avgLostVal{0};
     double totalValue{0}, goodValue{0}, brokenValue{0}, lostValue{0};
 
+    //calculate total and average equipment quantity and value
     for (size_t i = 0; i < eqpmnts.size(); i++) {
         totalQty += eqpmnts[i]->getGoodQ() + eqpmnts[i]->getBrokenQ() + eqpmnts[i]->getLostQ();
         totalGood += eqpmnts[i]->getGoodQ();
@@ -397,6 +398,7 @@ void SportsStoreProg::printSummary()
     }
 
 
+    //print report
     std::cout << "\n--- SPORTS STOREROOM: REPORT ---\n" << std::endl;
     std::cout << "Sports Equipment Records       : " << eqpmnts.size() << std::endl;
 
