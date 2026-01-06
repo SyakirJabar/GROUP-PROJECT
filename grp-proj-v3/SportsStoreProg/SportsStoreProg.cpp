@@ -12,8 +12,11 @@ typedef std::string str;
 #include "SportsStoreProg.h"
 
 //constructor
+//includes menu controller 
+//[B152510010 Ariff Sanusi]
 SportsStoreProg::SportsStoreProg()
 {
+    //open external file for writing (append mode)
     std::ofstream tStampRecord("SysAccessRecords.txt", std::ios::app);
 
     if (tStampRecord.is_open())
@@ -25,7 +28,7 @@ SportsStoreProg::SportsStoreProg()
         // Display the date and time represented by the timestamp
         tStampRecord << ctime(&timestamp);
 
-        tStampRecord.close();
+        tStampRecord.close();       //close file
     }
 
     char type;
@@ -41,29 +44,35 @@ SportsStoreProg::SportsStoreProg()
     {
         switch (type)
         {
+        //assign pointer to Ball obj
         case 'B':   sportsEquip = std::make_unique<Ball>(name, categ, goodQ, brokenQ, lostQ, unitValRM);
                     break;
 
+        //assign pointer to Racket obj
         case 'R':   sportsEquip = std::make_unique<Racket>(name, categ, goodQ, brokenQ, lostQ, unitValRM);
                     break;
 
+        //assign pointer to Throwable obj
         case 'T':   sportsEquip = std::make_unique<Throwable>(name, categ, goodQ, brokenQ, lostQ, unitValRM);
                     break;
 
+        //assign pointer to Stick obj
         case 'S':   sportsEquip = std::make_unique<Stick>(name, categ, goodQ, brokenQ, lostQ, unitValRM);
             break;
 
+        //assign pointer to Helmet obj
         case 'H':   sportsEquip = std::make_unique<Helmet>(name, categ, goodQ, brokenQ, lostQ, unitValRM);
             break;
         }       
 
-        eqpmnts.push_back(std::move(sportsEquip));  //transfer pointer ownership from sportsEquip
+        eqpmnts.push_back(std::move(sportsEquip));  //transfer ownership from pointer sportsEquip to an element of eqpmnts
     }
-    inFile.close();  //close file (good practice)
+    inFile.close();     //close file (good practice)
 
     char usrIn{};
-
     bool loop{true};
+    
+    //loop main menu until 'q' - exit
     while (loop)
     {
         char mainMenu[150]{""};
@@ -96,8 +105,10 @@ SportsStoreProg::SportsStoreProg()
         }
     }
 
+    //open .txt file for writing (writing mode)
     std::ofstream outFile("StoreroomData.txt", std::ios::out);
 
+    //write every equipment in vector to StoreroomData.txt
     if (outFile.is_open()) {
         for (size_t i = 0; i < eqpmnts.size(); i++)
         {
@@ -124,7 +135,8 @@ SportsStoreProg::SportsStoreProg()
 SportsStoreProg::~SportsStoreProg()
 {}
 
-//insert sports equipments into 
+//insert sports equipments into eqpmnts vector
+//[B152510105 Mohamad Adiputra Aiman bin Awang]
 void SportsStoreProg::insEquip() {
     str itemName, itemCateg;
     int goodQty, brokenQty, lostQty;
@@ -151,6 +163,7 @@ void SportsStoreProg::insEquip() {
         std::cout << "Equipment type: ";
         std::cin >> equipType;
 
+        //input validation
         if (std::tolower(equipType) != 'b' && std::tolower(equipType) != 'r' 
             && std::tolower(equipType) != 't' && std::tolower(equipType) != 's'
             && std::tolower(equipType) != 'h' && std::tolower(equipType) != 'q')
@@ -160,12 +173,12 @@ void SportsStoreProg::insEquip() {
             continue;
         }
 
+        //go back to main menu
         if (std::tolower(equipType) == 'q')   break;
 
-        equipType = std::tolower(equipType);
+        equipType = std::tolower(equipType);    //ensure equipType is always lowercase letter
 
-        // Using loop condition that reads itemName from cin to continue looping
-        // and returns false when Ctrl+Z is detected
+        //prompt user to enter a record of sports equipment
         std::cout << "\nName (NO spaces): ";
         std::cin >>itemName;
 
@@ -185,25 +198,30 @@ void SportsStoreProg::insEquip() {
         std::cout << "Value per Unit (RM): ";
         std::cin >> unitValue;
 
-        //instantiate SportsEquip derivation depending on equipment type
+        //instantiate a SportsEquip derived class depending on equipment type
         switch(equipType)
         {
+        //assign pointer to Ball obj
         case 'b':   sportsEquip = std::make_unique<Ball> 
                             (itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue);
                     break;
 
+        //assign pointer to Racket obj
         case 'r':   sportsEquip = std::make_unique<Racket> 
                             (itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue);
                     break;
 
+        //assign pointer to Throwable obj
         case 't':   sportsEquip = std::make_unique<Throwable> 
                             (itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue);
                     break;
 
+        //assign pointer to Stick obj
         case 's':   sportsEquip = std::make_unique<Stick> 
                         (itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue);
                 break;
 
+        //assign pointer to Helmet obj
         case 'h':   sportsEquip = std::make_unique<Helmet> 
                         (itemName, itemCateg, goodQty, brokenQty, lostQty, unitValue);
                 break;
