@@ -5,7 +5,7 @@ GROUP PROJECT TITLE: SCHOOL'S SPORTS EQUIPMENT STOREROOM MANAGEMENT SYSTEM
 Lecturer: Dr. Nuridawati
 
 Group Members:
-1. B152510105 Mohamad Adiputra Aiman bin Awang
+1. B152510105 Mohamad Adiputra Aiman bin Awang (LEADER)
 2. B152510087 Muhammad Syakir bin Abd Jabar Tambi
 3. B152510069 Muhammad Haziq bin Md Halid
 4. B152510111 Muhammad Nabil Mohd Tam
