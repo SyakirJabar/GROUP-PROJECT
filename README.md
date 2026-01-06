@@ -12,8 +12,7 @@ Group Members:
 5. B152510010 Ariff Sanusi
 
 Project Report: https://tinyurl.com/5d75jtcr
-
-==================================================================================
+---------------------------------------------------------------------------
 The classes, struct, and main.cpp files are located in /GROUP-PROJECT/grp-proj-v3.
 1. Download the latest release from our Github repository.
 2. Extract the .zip file.
